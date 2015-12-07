@@ -147,7 +147,7 @@ Almost identical to our Prototypal class from before! We can clearly see why `th
 
 
 
-###TL/DR###
+###TL;DR###
 * JavaScript was not built with classes in mind, and so has had to hack together different, sometimes odd, ways of creating them.
 * The keyword `this` is basically just another parameter for your functions, and will always refer to the object that called the function (i.e. for "obj.func()", obj is`this`).
 * Unless, of course, `this` is explicitly overridden, such as by the keyword `new` or by the ['call', 'apply', and 'bind' methods](http://javascriptissexy.com/javascript-apply-call-and-bind-methods-are-essential-for-javascript-professionals/ "the Call, Apply, and Bind methods are workhorses and should be part of your JavaScript repertoire for setting the 'this' value in functions").

@@ -64,7 +64,7 @@ bob.greeting(); // ???
 
 Simple! Easy. We've made a separate object `dudeMethods` to hold all of methods we might want to assign to dudes. And even if we end up with hundreds, we can assign them all in one line of code (if we have (Underscore.js)[http://underscorejs.org] installed) with `_extend(dude, dudeMethods);`. Now our dudes are all using the same greeting, we're saving a ton of memory, and still no weird words. Awesome!
 
-Well . . . no, not quite. Unfortunately the above code is broken and will behave in unexpected ways. There is one big step we missed. Now that `greeting` is being defined outside of `makeDude`, the variables `dude.thumbs` and `dude.name` no longer have any meaning. `dude`  defined elsehwere, and there is no way for `dudeMethods.greeting` to have any idea what they are. 
+Well . . . no, not quite. Unfortunately the above code is broken and will behave in unexpected ways. There is one big step we missed. Now that `greeting` is being defined outside of `makeDude`, the variables `dude.thumbs` and `dude.name` no longer have any meaning. `dude` is defined elsewhere, and there is no way for `dudeMethods.greeting` to have any idea what they are. 
 
 That's where `this` comes in. It seems like dark magic, but think of `this` as just another parameter. Just like `makeDudes` gets a `name` parameter, `greeting` function can have a `this` parameter. The only difference: we pass it in with dot notation. When we call `bob.greeting()` later, `bob` will be set to `this`. So if we rewrite our greeting function slightly...
 
@@ -106,7 +106,7 @@ var bob = makeDude('Bob');
 bob.greeting(); // "Who has 2 thumbs? Bob does!"
 {% endhighlight %}
 
-The Prototypal method of creating classes in JavaScript, despite it's name, does not use the keyword `prototype` at all. In fact, it's not much different from Functional-Shared. We still have `dudeMethods` holding our functions, we're just taking advantage of `Object.create`'s ability to make a new copy of an object to save a step or two. Since our dudes start out as copies of `dudeMethods`, there's no need to explicitly assign those methods anymore.
+The Prototypal method of creating classes in JavaScript, despite its name, does not use the keyword `prototype` at all. In fact, it's not much different from Functional-Shared. We still have `dudeMethods` holding our functions, we're just taking advantage of `Object.create`'s ability to make a new copy of an object to save a step or two. Since our dudes start out as copies of `dudeMethods`, there's no need to explicitly assign those methods anymore.
 
 Easy enough, but whatever happened to `new` and `prototype`?
 

@@ -83,7 +83,7 @@ The keyword `this` gets thrown around a lot in JavaScript, with big words like *
 
 
 
-##Prototypal Style Classes##
+###Prototypal Style Classes###
 {% highlight javascript %}
 var makeDude = function(name) {
 	var dude = Object.create(dudeMethods);

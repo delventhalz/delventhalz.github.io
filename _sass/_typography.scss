@@ -15,10 +15,10 @@ h1 {
 	@media #{$medium} {
 		@include font-rem(32);
 	}
-	
-h3 {
-		margin-top: 800px;
-	}
+}
+
+.entry-content h3 {
+	margin-top: 800px;
 }
 
 // Links

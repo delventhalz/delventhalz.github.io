@@ -8,7 +8,7 @@ For me, some of the most confusing things as a new JavaScript developer were the
 
 Until last week.
 
-Last week Hack Reactor dropped a bombshell of lesson on me. The mists parted, and three of the most confusing keywords in JavaScript suddenly made sense. It all starts with <a href="https://en.wikipedia.org/wiki/Class_(computer_programming)" alt ="extensible templates for creating objects, providing initial values for properties and implementations of behavior (methods)">classes</a>. You see, while some languages are built from the ground up to support object-oriented tools, JavaScript is not one of those languages. So the ways you can build a class are a little more . . . improvised.
+Last week Hack Reactor dropped a bombshell of lesson on me. The mists parted, and three of the most confusing keywords in JavaScript suddenly made sense. It all starts with <a href="https://en.wikipedia.org/wiki/Class_(computer_programming)" title="extensible templates for creating objects, providing initial values for properties and implementations of behavior (methods)">classes</a>. You see, while some languages are built from the ground up to support object-oriented tools, JavaScript is not one of those languages. So the ways you can build a class are a little more . . . improvised.
 
 
 

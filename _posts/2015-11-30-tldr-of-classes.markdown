@@ -12,7 +12,7 @@ Last week Hack Reactor dropped a bombshell of lesson on me. The mists parted, an
 
 
 
-##Functional Style Classes##
+###Functional Style Classes###
 {% highlight javascript %}
 var makeDude = function(name) {
 	var dude = {};
@@ -38,7 +38,7 @@ But, what if we need to make thousands of dudes? Suddenly that greeting function
 
 
 
-##Functional-Shared Style Classes##
+###Functional-Shared Style Classes###
 {% highlight javascript %}
 var makeDude = function(name) {
 	var dude = {};

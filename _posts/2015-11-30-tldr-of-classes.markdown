@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "the TL;DR of *this*, *new*, and *prototype*"
+title:  "the TL;DR of 'this', 'new', and 'prototype'"
 date:   2015-11-30 22:28:27 -0600
 categories: javascript
 ---

@@ -112,7 +112,7 @@ Easy enough, but whatever happened to `new` and `prototype`?
 
 
 
-##Pseudoclassical Class Style##
+###Pseudoclassical Class Style###
 {% highlight javascript %}
 var Dude = function(name) {
 	this.name = name;

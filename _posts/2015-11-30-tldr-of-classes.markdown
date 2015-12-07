@@ -4,7 +4,7 @@ title:  "the TL;DR of this, new, and prototype"
 date:   2015-11-30 22:28:27 -0600
 categories: javascript
 ---
-For me, some of the most confusing things as a new JavaScript developer were the keywords `this`, `new`, and `prototype`. Being someone who started with the strongly [object oriented](https://en.wikipedia.org/wiki/Object-oriented_programming "In OO programming, computer programs are designed by making them out of objects that interact with one another.") language Java (no relation) only made my confusion worse: *I use `new` to create a new instance of a class? Sounds familiar. But wait, why am I adding methods to a `prototype`? Seems a bit roundabout. And what exactly is `this` referring to again???* I was learning what to do by rote, which made mistakes common, trips to google frequent, and coding miserable.
+For me, some of the most confusing things as a new JavaScript developer were the keywords `this`, `new`, and `prototype`. Being someone who started with the strongly [object oriented](https://en.wikipedia.org/wiki/Object-oriented_programming "In OO programming, computer programs are designed by making them out of objects that interact with one another.") language Java (no relation) only made my confusion worse: *"I use `new` to create a new instance of a class? Sounds familiar. But wait, why am I adding methods to a `prototype`? Seems a bit roundabout. And what exactly is `this` referring to again???"* I was learning what to do by rote, which made mistakes common, trips to google frequent, and coding miserable.
 
 Until last week.
 
@@ -12,7 +12,7 @@ Last week Hack Reactor dropped a bombshell of lesson on me. The mists parted, an
 
 
 
-###Functional Style Classes###
+##Functional Style Classes##
 {% highlight javascript %}
 var makeDude = function(name) {
 	var dude = {};
@@ -38,7 +38,7 @@ But, what if we need to make thousands of dudes? Suddenly that greeting function
 
 
 
-###Functional-Shared Style Classes###
+##Functional-Shared Style Classes##
 {% highlight javascript %}
 var makeDude = function(name) {
 	var dude = {};
@@ -83,7 +83,7 @@ The keyword `this` gets thrown around a lot in JavaScript, with big words like *
 
 
 
-###Prototypal Style Classes###
+##Prototypal Style Classes##
 {% highlight javascript %}
 var makeDude = function(name) {
 	var dude = Object.create(dudeMethods);
@@ -112,7 +112,7 @@ Easy enough, but whatever happened to `new` and `prototype`?
 
 
 
-###Pseudoclassical Class Style###
+##Pseudoclassical Class Style##
 {% highlight javascript %}
 var Dude = function(name) {
 	this.name = name;
@@ -129,7 +129,7 @@ var bob = new Dude('Bob');
 bob.greeting(); // "Who has 2 thumbs? Bob does!"
 {% endhighlight %}
 
-*What in heaven's name is this now?!? Where did all of the code go? If `this` is an object calling a function shouldn't it refer the browser window here? What the heck are `new` and `prototype` doing anyway???* Believe it or not, this code is actually very similar to the Prototypal class from before. 
+*"What in heaven's name is this now?!? Where did all of the code go? If `this` is an object calling a function shouldn't it refer the browser window here? What the heck are `new` and `prototype` doing anyway???"* Believe it or not, this code is actually very similar to the Prototypal class from before. 
 
 The big thing to understand is that the keywords `new` and `prototype` are conveniences ginned up in order to save developers from writing a bit of code. Nothing particularly new is happening under the hood. For example, `prototype` is nothing more than an object automatically created by JavaScript and attached to every function (remember that in JavaScript, functions are themselves objects, which means that they can have their own properties). `Dude.prototype` is very similar to `dudeMethods` from before, the big difference being we didn't have to build it ourselves.
 

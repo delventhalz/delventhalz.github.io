@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "the TL;DR of this, new, and prototype"
+title:  "the TL;DR of *this*, *new*, and *prototype*"
 date:   2015-11-30 22:28:27 -0600
 categories: javascript
 ---
@@ -38,7 +38,7 @@ But, what if we need to make thousands of dudes? Suddenly that greeting function
 
 
 
-###Functional-Shared Style Classes###
+###Functional-Shared Classes###
 {% highlight javascript %}
 var makeDude = function(name) {
 	var dude = {};
@@ -112,7 +112,7 @@ Easy enough, but whatever happened to `new` and `prototype`?
 
 
 
-###Pseudoclassical Class Style###
+###Pseudoclassical Style Classes###
 {% highlight javascript %}
 var Dude = function(name) {
 	this.name = name;

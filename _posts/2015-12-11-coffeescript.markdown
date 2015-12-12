@@ -30,40 +30,34 @@ In this case we are telling CoffeeScript to compile every `.coffee` file in our 
 
 
 ###The Highlights of CoffeeScript###
-* **No `;` or `{}`, and not nearly as much `()`**
+ **No `;` or `{}`, and not nearly as much `()`**
+CoffeeScript is designed to read a lot like english, so it does away with much of the more extraneous punctuation.
 
-> > CoffeeScript is designed to read a lot like english, so it does away with much of the more extraneous punctuation.
+ **No `var` keyword. At all.** 
+ You'll actually break things if you try to throw `var` in there. Just assign values directly to a variables, and CoffeeScript will automatically instantiate them at the top of the current scope.
 
-* **No `var` keyword. At all.** 
+**CoffeeScript is white space delimited, so indents deliberately**
 
-> > You'll actually break things if you try to throw `var` in there. Just assign values directly to a variables, and CoffeeScript will automatically instantiate them at the top of the current scope.
+**`fn = ->` or `fn = (param) ->` creates functions**
+Writing functions is quicker with the arrow notation. You also have the option of leaving off the `return` keyword, as CoffeeScript automatically returns the last last logically executed line of code.
 
-* **CoffeeScript is white space delimited, so indents deliberately**
+**Bracket `[]` and dot `.` notation are essentially unchanged.**
 
-* **`fn = ->` or `fn = (param) ->` creates functions**
+**CoffeeScript probably has a keyword for that conditional you wanted**
+`and`, `or`, `unless`, `then`, `is`, `isnt`, `yes`, `no`, `off`, to name a few. Just use `>` and `<` for greater than, and less than though.
 
-> > Writing functions is quicker with the arrow notation. You also have the option of leaving off the `return` keyword, as CoffeeScript automatically returns the last last logically executed line of code.
+**Dynamically create and access arrays with dots**
+`[1...4]` will automatically generate the array `[1, 2, 3]`, and `[1..4]` does the same thing, but includes the last value. Similarly you can create a slice of your existing array with `array[2...4]`.
 
-* **Bracket `[]` and dot `.` notation are essentially unchanged.**
-
-* **CoffeeScript probably has a keyword for that conditional you wanted**
-
-> > `and`, `or`, `unless`, `then`, `is`, `isnt`, `yes`, `no`, `off`, to name a few. Just use `>` and `<` for greater than, and less than though.
-
-* **Dynamically create and access arrays with dots**
-
-> > `[1...4]` will automatically generate the array `[1, 2, 3]`, and `[1..4]` does the same thing, but includes the last value. Similarly you can create a slice of your existing array with `array[2...4]`.
-
-* **Classes are much improved**
-
-> > CoffeeScript allows one word [Pseudoclassical](/posts/2015-11-30-tldr-of-classes.html) class creation with the keyword `class`, class inheritance with the keyword `extends`, and method inheritance with the keyword `super`.
+**Classes are much improved**
+CoffeeScript allows one word [Pseudoclassical](/posts/2015-11-30-tldr-of-classes.html) class creation with the keyword `class`, class inheritance with the keyword `extends`, and method inheritance with the keyword `super`.
 
 
 ###Code Comparison!###
 Let's see it in action:
 
-<div>
-<span class="comparison">
+<div class="container">
+<div class="comparison">
 {% highlight coffeescript %}
 #Some examples of CoffeeScript code
 sum = (x, y=x) -> x + y
@@ -87,9 +81,9 @@ for num in arr[2...7]
 		
 		
 {% endhighlight %}
-</span><!--
+</div><!--
 
---><span class="comparison">
+--><div class="comparison">
 {% highlight javascript %}
 //The equivalent JavaScript Code
 var sum = function(x, y) {
@@ -113,7 +107,7 @@ for (var k = 2; k < 7; k++) {
 	}
 }
 {% endhighlight %}
-</span>
+</div>
 </div>
 
 

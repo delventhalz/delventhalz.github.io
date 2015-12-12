@@ -34,7 +34,7 @@ In this case we are telling CoffeeScript to compile every `.coffee` file in our 
 
  **No `var` keyword. At all.** You'll actually break things if you try to throw `var` in there. Just assign values directly to a variables, and CoffeeScript will automatically instantiate them at the top of the current scope.
 
-**CoffeeScript is white space delimited, so indents deliberately.**
+**CoffeeScript is white space delimited, so indent deliberately.**
 
 **`fn = ->` or `fn = (param) ->` creates functions.** Writing functions is quicker with the arrow notation. You also have the option of leaving off the `return` keyword, as CoffeeScript automatically returns the last last logically executed line of code (you can explictly `return` as well if you like).
 

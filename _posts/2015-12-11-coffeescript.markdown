@@ -36,7 +36,7 @@ In this case we are telling CoffeeScript to compile every `.coffee` file in our 
 
 **CoffeeScript is white space delimited, so indents deliberately.**
 
-**`fn = ->` or `fn = (param) ->` creates functions.** Writing functions is quicker with the arrow notation. You also have the option of leaving off the `return` keyword, as CoffeeScript automatically returns the last last logically executed line of code.
+**`fn = ->` or `fn = (param) ->` creates functions.** Writing functions is quicker with the arrow notation. You also have the option of leaving off the `return` keyword, as CoffeeScript automatically returns the last last logically executed line of code (you can explictly `return` as well if you like).
 
 **Bracket `[]` and dot `.` notation are essentially unchanged.**
 

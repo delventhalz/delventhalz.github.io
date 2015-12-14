@@ -40,7 +40,7 @@ In this case we are telling CoffeeScript to compile every `.coffee` file in our 
 
 **Bracket `[]` and dot `.` notation are essentially unchanged.**
 
-**CoffeeScript probably has a keyword for that conditional you wanted.** `and`, `or`, `unless`, `then`, `is`, `isnt`, `yes`, `no`, `off`, to name a few. Just use `>` and `<` for greater than, and less than though.
+**CoffeeScript probably has a keyword for that conditional you wanted.** `and`, `or`, `unless`, `then`, `is`, `isnt`, `yes`, `no`, `off`, to name a few. Just use `>` and `<` for greater than, and less than though
 
 **Dynamically create and access arrays with dots.** `[1...4]` will automatically generate the array `[1, 2, 3]`, and `[1..4]` does the same thing, but includes the last value. Similarly you can create a slice of your existing array with `array[2...4]`.
 

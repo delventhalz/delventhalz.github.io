@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "introducing Replacer.js"
-date:   2016-01-09 20:25:00 -0600
+date:   2015-12-28 21:05:00 -0600
 categories: javascript coffeescript
 ---
 For those of you who don't know me: I'm a huge Shakespeare geek. I love performing, reading, and teaching Shakespeare. I especially love his First Folio, the earliest surviving publications of his work. The problem? Weird typography. At the time it wasn't unusual to switch v's and u's and i's and j's around willy nilly, because letters were expensive, and those basically loow the same, right? So already goofy 16th century spellings gets get goofier with words like "vnto", "ioyner", and "beleeue." In the past I've spent hours with a cobbled together workflow using spellchecks and find/replacers to try and fix the problem.

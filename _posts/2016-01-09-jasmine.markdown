@@ -1,0 +1,190 @@
+---
+layout: post
+title:  "writing your own tests with Jasmine"
+date:   2015-12-28 21:05:00 -0600
+categories: javascript jasmine test-driven-development
+---
+Test driven development (or TDD), is a JavaScript development paradigm that espouses not only building tests to make sure your code works properly, but actually writing those tests *before* you code. The workflow looks something like this:
+
+1. Conceptualize project.
+2. Build tests for projects.
+3. Watch tests fail.
+4. Make tests not fail.
+5. Improve project.
+6. Repeat.
+
+In this paradigm, testing serves essentially as an outline for your code. Writing them first forces you to really think through what it is you want your code to do, and how it is you will get it to do it. It can be a heady process, but once you are done, the benefits are self-evident. After you're done you just code to the test, filling in each piece as needed to get your tests to pass. And later, if you change something, you'll immediately know if you broke your code.
+
+So how can we make writing tests as painless as possible? Thankfully are a [variety of testing libraries](http://www.creativebloq.com/javascript/essential-javascript-top-five-testing-libraries-10126048) out there to help simplify and streamline the process. Today, we're going to talk about [Jasmine](http://jasmine.github.io/).
+
+### Getting Started
+As you might expect, Jasmine has an npm module which you can install easily enough through your command line: 
+
+```
+npm install -g jasmine
+```
+
+Afterwards, you'll want to head to your project's directory and type:
+
+```
+jasmine init
+```
+
+And if you'd like you can even provision yourself with some example files using:
+
+```
+jasmine examples
+```
+
+If you'd like to configure your project's testing suite at all, you fill find a config file in `spec/support/jasmine.json`, and you can actually run your tests by going to your project's root directory and simply typing:
+
+```
+jasmine
+```
+
+### Writing a Test
+Jasmine tests are built on a fairly simple syntac designed to look more or less like english. Well, english with a lot of extra periods and anoymous functions.
+
+{% highlight javascript %}
+describe('Addition', function() {
+	
+});
+{% endhighlight %}
+
+Say hello to the `describe` block. This is the basic building block of Jasmine tests. It designates a collection of tests all pertaining to a particular part of your code. There is no hard and fast rule about how much of your code any given describe block should cover, just think of it as it's own sub-heading.
+
+{% highlight javascript %}
+describe('Arithmatic', function() {
+	
+	it('should be able to add', function() {
+		
+	});
+	
+});
+{% endhighlight %}
+
+If `describe` is a sub-heading, than the `it` block is a bullet point. These are used to describe each individual qualities you want to test. What is it that arithmatic should be able to do in your project? List each thing you come up with in an `it` block. You'll notice that the code for both of these is very similar. They are functions which take two parameters, a string description, followed by an anonymous function that contains what will actually be run.
+
+{% highlight javascript %}
+describe('Arithmatic', function() {
+	
+	it('should be able to add', function() {
+		
+		expect(2+2).toEqual(4);
+		
+	});
+	
+});
+{% endhighlight %}
+
+And now with an `expect` statement, our test is complete! If an `it` block represent the individual qualities being tested, the `expect` statements are the actual stress tests we are subjecting those qualities to. if any `expect` statement were to fail in testing, the enclosing `it` block will be show up as failed, and print a convenient explanation for the failure. Specially, `expect` statements work by comparing the argument passed to the `expect` call to the argumant passed to the "matcher" chained off it, in this case `toEqual`. There are a variety of matchers (described below), and they are all designed to read like plain english.
+
+{% highlight javascript %}
+describe('Arithmatic', function() {
+	
+	it('should be a word', function() {
+		
+		expect(typeof 'Arithmatic').toBe('string');
+		
+	});
+	
+	describe('Addition, function() {
+	
+		it('should be able to add', function() {
+		
+			expect(2+2).toEqual(4);
+			expect(4+4).toEqual(8);
+			expect(2+2).not.toEqual(5);
+		
+		});
+	
+	});
+	
+});
+{% endhighlight %}
+
+Note that there is a fair amount of freedom to how you mix and match your `describe`, `it`, and `expect` statements. `describe` blocks can contain other `describe` blocks, and `it` blocks can be nested at the same level as describes, but you would never place a `describe` block *within* an `it` block, and an `it` block must be contrained within at least one `describe`. Additionally, you can stack as many `expect` statements as you like within an `it`. Every `expect` must succeed for the test to pass.
+
+### Before and After
+Frequently you will want to execute code before and/or after each of your tests. Rather than copying and pasting that code within every `it` block, Jasmine provides you with the `beforeEach` and `afterEach` functions:
+
+{% highlight javascript %}
+describe('Arithmatic', function() {
+	var add = function(x, y) {
+		return x + y;
+	};
+	var operands;
+	
+	beforeEach(function() {
+		
+		operands = [1, 2, 3, 4];
+		
+	})
+	
+	it('should be able to add', function() {
+		
+		for (var i = 0; i < operands.length; i++) {
+			expect(add(operands[i], 2)).toEqual(i+3);
+		}
+		
+	});
+	
+	afterEach(function(){
+		
+		operands = [];
+		
+	});
+	
+});
+{% endhighlight %}
+
+Here we are working with some functions and variables that we are going to use in our tests, and we use `beforeEach` to ensure they are set properly before each test. `afterEach`, will allow us to reset any changes we may have made during the test. You do not need both of these blocks, and would probably only use one in most cases, but both are available as needed. Note that unlike `describe` and `it`, neither takes a descriptive string as an argument, just the anonymous function. Also not that all of JavaScript's regular scoping rules apply. If you declare a variable in your `beforeEach` block it will **not** be available inside your `it` blocks. Instead, you must declare variables within the enclosing `describe` and modify them as needed within the `beforeEach`.
+
+### Some Useful Matchers
+
+As I said earlier, `toEqual` is called a 'matcher', and there are a few others to choose from. You can even [write your own](https://blog.pivotal.io/labs/labs/writing-beautiful-specs-jasmine-custom-matchers). Some others you might find useful:
+
+{% highlight javascript %}
+expect('a').not.toEqual('b');
+{% endhighlight %}
+
+Using `not` before your matcher will do just what you expect: expect things *not* to match.
+
+{% highlight javascript %}
+expect('b').toBe('b');
+{% endhighlight %}
+
+`toBe` is very similar to `toEqual`, but is much stricter when it comes to objects. `toEqual` will actually recursively examine two different objects to see if they are "equivalent". For example `expect({a: 1}).toEqual({a: 1})` will pass, but `expect({a: 1}).toBe({a: 1})` will fail. Although the two objects are equivalent, they do not actually refer to the same spot in memory. For primitive data types there is no difference between `toBe` and `toEqual`.
+
+{% highlight javascript %}
+expect(obj.prop).toBeDefined();
+
+expect(obj.foobar).toBeUndefined();
+{% endhighlight %}
+
+As you might expect, `toBeDefined` and `toBeUndefined` test whether or not a thing is `undefined` or not.
+
+{% highlight javascript %}
+expect(1).toBeTruthy();
+
+expect(0).toBeFalsey();
+{% endhighlight %}
+
+Also pretty straightforward. Tests whether the given argument is truthy or falsey.
+
+{% highlight javascript %}
+expect([1, 2, 3]).toContain(2);
+{% endhighlight %}
+
+`toContain` is a nifty little matcher which will check an array or string to see if it contains an item or substring.
+
+{% highlight javascript %}
+expect(3.14).toBeCloseTo(3.1, 1);
+{% endhighlight %}
+
+`toBeCloseTo` allows you to round numbers to a specified decimal place. The above example passes becasue 3.14 equals 3.1 when rounded to the first decimal place. `expect(3.14).toBeCloseTo(3.1, 2)` would fail. Using a zero, `toBeCloseTo(n, 0)` will effectively round your arguments to whole integers, while negative numbers start looking at the tens places to the left of the decimal: `expect(120).toBeCloseTo(100, -2)`.
+
+There are a handful of other matchers out there as well, which you can find over in [Jasmine's documentation](http://jasmine.github.io/), including `toBeNull`, `toBeGreaterThan`, `toBeLessThan`, `toThrow` (for exceptions), and `toMatch` (for regex, i.e. regular expressions).
+
+### Now Go Write Some Tests
+Test driven development is the basis for smart, focuses, effecient development. It allows you to spend less time wondering what to do next and helps you avoid project breaking bugs before that begin. And the tools to build these tests are easy and available. So what you waiting for?

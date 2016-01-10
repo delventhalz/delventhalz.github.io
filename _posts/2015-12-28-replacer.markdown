@@ -14,18 +14,22 @@ Currently just a 0.1 release, expect a few more updates from me in the near futu
 
 ### Installing
 First thing to do is to install Node.js and npm. If you don't know how to do that, [you'll find great instructions here](https://docs.npmjs.com/getting-started/installing-node). You'll also want to go to [Replacer.js's github page](https://github.com/delventhalz/replacer.js) and download a zip of the files. Afterwards, open up your command line, navigate over to Replacer's directory and type:  
+
 ```
 npm install
 ```
+
 Npm will automatically install Replacer.js's dependencies ([readline-sync](https://github.com/anseki/readline-sync) and [spellchecker](https://github.com/atom/node-spellchecker), if your curious), and you are ready to run it.
 
 ### Usage
 By default Replacer.js will read and change text from the `target.txt` file provided, and save changed and ignored words to the `cipher.json` and `ignore.json` files in the `words/` directory. To run replacer with these defaults, simply type into your command line:
+
 ```
 node replacer
 ```
 
 You can also specify other text files, as many as you like, by typing their relative paths as arguments in the command line, like this:
+
 ```
 node replacer macbeth.txt midsummer/act1.txt
 ```
@@ -34,11 +38,16 @@ In future versions you will also be able to specify different JSON files.
 
 ### Shortcuts
 When running, Replacer will prompt you with any misspelled word containing a 'u', 'v', 'j', or 'i' that it hasn't seen before. That character list is currently hard-coded in, but will soon be easily customizable through another JSON file. When prompted, you can simply ignore the word by pressing enter, type in a new spelling, or use shortcuts to make quick switches. For example, consider the following possible prompts and user responses:
+
 ```
 thinke? 
+
 ioyes? j
+
 reuiu'd? v
+
 successiue? successive
+
 vnproued? *
 ```
 

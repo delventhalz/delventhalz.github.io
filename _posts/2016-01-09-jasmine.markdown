@@ -2,7 +2,7 @@
 layout: post
 title:  "writing your own tests with Jasmine"
 date:   2016-01-09 20:25:00 -0600
-categories: javascript jasmine test-driven-development
+categories: javascript
 ---
 Test driven development (or TDD), is a JavaScript development paradigm that espouses not only building tests to make sure your code works properly, but actually writing those tests *before* you code. The workflow looks something like this:
 

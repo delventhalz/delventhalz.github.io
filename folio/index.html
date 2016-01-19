@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>CSS Shakespeare</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link href="styles/main.css" rel="stylesheet">
+    <!-- Styles to be assign later for the first folio -->
+    <link class="formatting" rel="stylesheet">
+    <div class="one-off-styles"></div>
+  </head>
+
+  <body role="document">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a id="header_brand" class="navbar-brand" href="#">CSS Shakespeare</a>
+        </div>
+
+          <!-- Print and Info buttons -->
+          <ul class="nav navbar-nav navbar-right">
+            <li id="info_button"><a href=""><span class="glyphicon glyphicon-info-sign"></span></a></li>
+            <li id="print_button" class="active"><a href=""><span class="glyphicon glyphicon-print"></span></a></li>
+          </ul>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <div class="navbar-top col-sm-12">
+
+              <!-- Play Selection -->
+              <form class="navbar-form navbar col-sm-6">
+                <input id="play_selection" type="text" class="form-control autocomplete" placeholder="Pick a play...">
+                <div class="btn-group" role="group">
+                  <button id ="scene_select" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Scene
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Act 1</a></li>
+                    <li class="dropdown-header"><a href="#">Scene 1</a></li>
+                    <li class="dropdown-header"><a href="#">Scene 2</a></li>
+                    <li><a href="#">Act 2</a></li>
+                    <li class="dropdown-header"><a href="#">Scene 1</a></li>
+                    <li class="dropdown-header"><a href="#">Scene 2</a></li>
+                  </ul>
+                </div>
+                <label class="checkbox-inline">
+                  <input id="display_box" type="checkbox" value="displayAll"> Display all
+                </label>
+              </form>
+              <div class="nav navbar-right col-sm-6">
+                <div class="nav-header">Presets</div>
+                <button id="default_style" type="button" class="btn btn-primary radio-toggle">Default</button>
+                <button id="original_style" type="button" class="btn btn-primary radio-toggle">Original</button>
+                <button id="night_style" type="button" class="btn btn-primary radio-toggle">Night</button>
+              </div>
+            </div>
+
+          <div class="navbar-bottom col-sm-12">
+
+            <!-- Fonts -->
+            <div class="nav navbar-nav col-sm-3">
+              <div class="nav-header">Fonts</div>
+              <button id="font_smaller" type="button toggle" class="btn btn-default"><span class="glyphicon glyphicon-font"></span><sup><small><span class="glyphicon glyphicon-minus"></span></small></sup></button>
+              <button id="font_larger" type="button" class="btn btn-default"><span class="glyphicon glyphicon-font"></span><sup><small><span class="glyphicon glyphicon-plus"></span></small></sup></button>
+              <div class="btn-group" role="group">
+                <button id="line_spacing" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-text-height"></span>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">1.0</a></li>
+                  <li><a href="#">1.2</a></li>
+                  <li><a href="#">2.0</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Characters -->
+            <div class="nav navbar-nav col-sm-3">
+              <div class="nav-header">Characters</div>
+              <button id="character_linebreak" type="button" class="btn btn-default toggle"><strong>⏎</strong></button>
+              <button id="character_caps" type="button" class="btn btn-default toggle">CAPS</button>
+              <button id="character_bold" type="button" class="btn btn-default toggle"><span class="glyphicon glyphicon-bold"></span></button>
+            </div> 
+
+            <!-- Stage Directions -->
+            <div class="nav navbar-nav col-sm-1">
+              <div class="nav-header">Directions</div>
+              <button id="direction_linebreak" type="button" class="btn btn-default toggle"><strong>⏎</strong></button>
+            </div>
+
+            <!-- First Folio -->
+            <div class="nav navbar-nav col-sm-2">
+              <div class="nav-header">Punctuation</div>
+              <button id="paragraph_linebreak" type="button" class="btn btn-default toggle"><span class="glyphicon glyphicon-resize-vertical"></span></button>
+              <button id="punctuation_whitespace" type="button" class="btn btn-default toggle"><strong>!?.</strong></button>
+              <button id="punctuation_bold" type="button" class="btn btn-default toggle"><span class="glyphicon glyphicon-bold"></span></button>
+            </div> 
+
+            <!-- Numbering -->
+            <div class="nav navbar-nav col-sm-3">
+              <div class="nav-header">Numbering</div>
+              <button id="line_numbers" type="button" class="btn btn-default toggle"><em><small>5, 10, 15</small></em></button>
+              <button id="syllable_numbers" type="button" class="btn btn-default toggle"><em><small>to•be•or</small></em></button>
+            </div> 
+
+          </div> <!--/.navbar-bottom -->
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="content">
+      <div class="jumbotron text">
+        <div class="container">
+          <h1>Hello, world!</h1>
+          <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-md-4">
+            <h2>Heading</h2>
+            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          </div>
+          <div class="col-md-4">
+            <h2>Heading</h2>
+            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+         </div>
+          <div class="col-md-4">
+            <h2>Heading</h2>
+            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          </div>
+        </div>
+
+        <hr>
+
+        <footer>
+          <p>&copy; 2015 Company, Inc.</p>
+        </footer>
+      </div> <!-- /container -->
+    </div> <!-- /content -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="lib/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="lib/jquery.min.js"><\/script>')</script>
+    <script src="lib/jquery.autocomplete.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="interface.js"></script>
+  </body>
+</html>

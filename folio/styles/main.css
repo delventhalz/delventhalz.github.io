@@ -1,3 +1,8 @@
+/*Overwrite Bootstrap Stylings*/
+p {
+  margin: 0;
+}
+
 .content {
   margin-top: 176px;
 }
@@ -23,6 +28,23 @@ textarea:focus, input:focus{
 
 .navbar-brand {
   font-style: normal;
+}
+
+.dropdown-menu {
+  padding: 0.5em;
+  color: #000;
+  width: 4em; /*TODO: find out why this doesn't work*/
+  font-size: 1.2em;
+  font-style: normal;
+  cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+  background-color: #ddd;
+}
+
+.dropdown-menu li:active {
+  background-color: #235c9e;
 }
 
 .autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }

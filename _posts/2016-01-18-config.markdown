@@ -45,11 +45,11 @@ Why bother writing out an entire JavaScript file when we're just trying to save 
 
 {% highlight javascript %}
 {
-	SESSION_SECRET: 'shhh dont tell',
-	KEYS: {
-		GIPHY: 'kajhfaksjdfawdb',
-		SUNLIGHT: 'alkwejbsadhbvsal'
-	}
+  SESSION_SECRET: 'shhh dont tell',
+  KEYS: {
+    GIPHY: 'kajhfaksjdfawdb',
+    SUNLIGHT: 'alkwejbsadhbvsal'
+  }
 }
 {% endhighlight %}
 
@@ -72,12 +72,12 @@ var GIPHY_KEY = '';
 var SUNLIGHT_KEY = '';
 
 $http({
-	method: 'GET',
-	url: '/api/keys'
+  method: 'GET',
+  url: '/api/keys'
 })
 .then(function (response) {
-	GIPHY_KEY = response.data.GIPHY;
-	SUNLIGHT_KEY = response.data.SUNLIGHT;
+  GIPHY_KEY = response.data.GIPHY;
+  SUNLIGHT_KEY = response.data.SUNLIGHT;
 });
 {% endhighlight %}
 

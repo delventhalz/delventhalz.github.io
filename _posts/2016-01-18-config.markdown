@@ -25,7 +25,7 @@ module.exports = {
   SESSION_SECRET: SESSION_SECRET,
   KEYS: KEYS
 };
-{% end highlight %}
+{% endhighlight %}
 
 Afterwards add `config.js` (or whatever you called it) to your `.gitignore`, and then you require it in your server like any other JS file or module:
 
@@ -36,7 +36,7 @@ var app = express();
 
 var SESSION_SECRET = require('./config.js').SESSION_SECRET;
 app.use( session({ secret: SESSION_SECRET }) );
-{% end highlight %}
+{% endhighlight %}
 
 You're done! Now your API keys and other secrets are stashed away from prying eyes on github. But I think we can simplify this a bit more.
 
@@ -51,12 +51,12 @@ Why bother writing out an entire JavaScript file when we're just trying to save 
 		SUNLIGHT: 'alkwejbsadhbvsal'
 	}
 }
-{% end highlight %}
+{% endhighlight %}
 
 Of course, you'll have to change the filename to `config.json`, and update our `.gitignore` accordingly. But how do we import a json file into our node server? Really easily actally. Node can import json files just like anything else. All we have to change in our server is two little letters:
 {% highlight javascript %}
 var SESSION_SECRET = require('./config.json').SESSION_SECRET;
-{% end highlight %}
+{% endhighlight %}
 
 As an added bonus, I also like to use the JavaScript convention for private variables and name the file `_config.json` if I'm not planning on making it public. It's a nice reminder that no one should be passing the file around, though obviously this has no effect on the way the code actually runs.
 
@@ -79,6 +79,6 @@ $http({
 	GIPHY_KEY = response.data.GIPHY;
 	SUNLIGHT_KEY = response.data.SUNLIGHT;
 });
-{% end highlight %}
+{% endhighlight %}
 
 This call would only need to happen once when the client is first loaded, so the extra bandwidth required is negligible, but of course if the route does not require some sort of authorization, this really isn't much more sequire than saving the API keys in your code. There won't be much to stop determined ne'er-do-wells from sending their own GET request and peeking at the results. But at least you've taken a few first steps to building a better security strategy on your new server.

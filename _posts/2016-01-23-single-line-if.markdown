@@ -106,8 +106,9 @@ Same effect. Less Code. More readable. And imagine the alternate version using `
 But how does this bizarre hack of the OR operator actually work? The secret is in how JavaScript handles logical operators. In the case of `||`, JS is trying to determine whether either of the two operands is "truthy". As soon as it sees the first one is, there is no reason to bother with the second. So it doesn't. Does that mean we can use `&&` to write single-line conditionals too?
 
 ###Using && to Write Single-Line Conditionals
-Similar to the logical OR, `&&` checks to see if either of two operands is *falsey*. *(REMEMBER! Falsey values in JavaScript include `false`, `0`, `''`, `undefined`, and `null`. Everything else is truthy.)*
-If the first operand is falsey, there is no point in checking the second. This behavior is not used nearly as often as `||`, but I did just write some actual server code that I couldn't have been done any other way:
+Similar to the logical OR, `&&` checks to see if either of two operands is *falsey*. If the first operand is, there is no point in checking the second. *(REMEMBER! Falsey values in JavaScript include `false`, `0`, `''`, `undefined`, and `null`. Everything else is truthy.)*
+
+This behavior is not used nearly as often as `||`, but I did just write some actual server code that I couldn't have been done any other way:
 
 {% highlight javascript %}
 module.exports.seedUsers = function(next) {

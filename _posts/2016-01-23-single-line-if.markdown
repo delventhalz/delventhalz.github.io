@@ -11,6 +11,7 @@ The traditional way to write an if statement looks something like this:
 
 {% highlight javascript %}
 var five = 5;
+
 if (five > 4) {
   console.log('Five is greater than for!');
   spreadTheNews();
@@ -106,7 +107,7 @@ But how does this bizarre hack of the OR operator actually work? The secret is i
 
 ###Using && to Write Single-Line Conditionals
 Similar to the logical OR, `&&` checks to see if either of two operands is *falsey*. *(REMEMBER! Falsey values in JavaScript include `false`, `0`, `''`, `undefined`, and `null`. Everything else is truthy.)*
-If the first operand is, there is no point in checking the second. This behavior is not used nearly as often as `||`, but I did just write some actual server code that I couldn't have done any other way:
+If the first operand is falsey, there is no point in checking the second. This behavior is not used nearly as often as `||`, but I did just write some actual server code that I couldn't have been done any other way:
 
 {% highlight javascript %}
 module.exports.seedUsers = function(next) {

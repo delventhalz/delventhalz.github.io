@@ -3,7 +3,7 @@
  * * * * * * * * * * * * * * * */
 
 var settings = {
-  interval: 3000,
+  interval: 500,
   timestampInterval: 5000,
   slideSpeed: 300
 };
@@ -19,7 +19,7 @@ var index = {
   overlay: 0
 };
 
-// Global timer object prevents multiple timers being created
+// Global timer object prevents multiple refresh timers being created
 var timer = {};
 
 // Couldn't figure out how to properly initialize visitor until I examined 
@@ -174,7 +174,7 @@ $(document).ready(function(){
     }
   });
   
-  // Begin loading tweetles
+  // Begin loading tweetles and refreshing the timestamps
   fillTweetles();
   refreshTimestamp();
 });

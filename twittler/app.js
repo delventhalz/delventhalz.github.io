@@ -44,7 +44,7 @@ var fillTweetles = function(user) {
       printTweetle();
     }
   }
-  
+
   refreshTweetles(user);
 };
 

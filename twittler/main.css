@@ -54,17 +54,17 @@ Clearfix
 
 .clearfix:before,
 .clearfix:after {
-	content: "";
-	display: table;
+  content: "";
+  display: table;
 }
 
 .clearfix:after {
-	clear: both;
+  clear: both;
 }
 
 .clearfix {
-	clear: both;
-	*zoom: 1;
+  clear: both;
+  *zoom: 1;
 }
 
 /*
@@ -74,27 +74,27 @@ Main Styles
 */
 
 body {
-	color: #222;
-	font: 300 16px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+60,cccccc+100 */
-	background: #ffffff; /* Old browsers */
-	background: -moz-linear-gradient(left,  #ffffff 60%, #cccccc 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, right top, color-stop(60%,#ffffff), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(left,  #ffffff 60%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(left,  #ffffff 60%,#cccccc 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(left,  #ffffff 60%,#cccccc 100%); /* IE10+ */
-	background: linear-gradient(to right,  #ffffff 60%,#cccccc 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#cccccc',GradientType=1 ); /* IE6-9 */
+  color: #222;
+  font: 300 16px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+60,cccccc+100 */
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(left,  #ffffff 60%, #cccccc 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(60%,#ffffff), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left,  #ffffff 60%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left,  #ffffff 60%,#cccccc 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left,  #ffffff 60%,#cccccc 100%); /* IE10+ */
+  background: linear-gradient(to right,  #ffffff 60%,#cccccc 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#cccccc',GradientType=1 ); /* IE6-9 */
 }
 
 header,
 footer {
-	min-height: 100px;
+  min-height: 100px;
 }
 
 header {
-	padding: 44px;
-	text-align: center;
+  padding: 44px;
+  text-align: center;
 }
 
 em {
@@ -102,12 +102,12 @@ em {
 }
 
 a {
-	color: #222;
+  color: #222;
 }
 
 a:active,
 a:visited {
-	color: #666;
+  color: #666;
 }
 
 /*
@@ -117,15 +117,15 @@ Layout
 */
 
 .container {
-	margin:0 auto;
-	padding:0 30px;
-	max-width: 960px;
+  margin:0 auto;
+  padding:0 30px;
+  max-width: 960px;
 }
 
 .main {
-	min-height: 640px;
-	background-color: #65acdb;
-	padding: 22px;
+  min-height: 640px;
+  background-color: #65acdb;
+  padding: 22px;
 }
 
 /*
@@ -135,22 +135,22 @@ Header
 */
 
 h1 {
-	margin-top: 24px;
+  margin-top: 24px;
 }
 
 .logo {
-	max-width: 800px;
-	width: 100%;
-	height: auto;
+  max-width: 800px;
+  width: 100%;
+  height: auto;
 }
 
 h3 {
-	font-size: 24px;
-	font-weight: 100;
-	font-style: italic;
-	text-transform: lowercase;
-	color: #65acdb;
-	padding-bottom: 22px;
+  font-size: 24px;
+  font-weight: 100;
+  font-style: italic;
+  text-transform: lowercase;
+  color: #65acdb;
+  padding-bottom: 22px;
 }
 
 /*
@@ -161,17 +161,17 @@ Footer
 
 .copy-notice,
 .bird-link {
-	margin-top: 14px;
-	font-size: 14px;
-	font-weight: 100;
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 100;
 }
 
 .copy-notice {
-	float: left;
+  float: left;
 }
 
 .bird-link {
-	float: right;
+  float: right;
 }
 
 /*
@@ -181,24 +181,24 @@ Buttons
 */
 
 .btn {
-	border: 2px solid #fff;
-	border-radius: 5px;;
-	color: #fff;
-	background-color: #65acdb;
-	font-size: 14px;
-	font-weight: 600;
-	text-transform: uppercase;
-	padding: 0 12px;
-	height: 32px;
+  border: 2px solid #fff;
+  border-radius: 5px;;
+  color: #fff;
+  background-color: #65acdb;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0 12px;
+  height: 32px;
 }
 
 .btn:active {
-	color: #65acdb;
-	background-color: #fff;
+  color: #65acdb;
+  background-color: #fff;
 }
 
 .btn:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 
@@ -209,44 +209,44 @@ Main
 */
 
 .input {
-	margin: 6px;
-	margin-bottom: 24px;
+  margin: 6px;
+  margin-bottom: 24px;
 }
 
 .user-message {
-	width: 50%;
-	height: 24px;
-	margin-right: 12px;
+  width: 50%;
+  height: 24px;
+  margin-right: 12px;
 }
 
 .refresh,
 .hide {
-	float: right;
+  float: right;
 }
 
 .tweetle {
     border-radius: 10px;
-	padding: 18px;
-	margin: 6px;
-	display: none;
-	background-color: #fff;
+  padding: 18px;
+  margin: 6px;
+  display: none;
+  background-color: #fff;
 }
 
 .username {
-	font-size: 18px;
-	font-weight: 500;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .username:hover {
-	color: #666;
-	cursor: pointer;
+  color: #666;
+  cursor: pointer;
 }
 
 .timestamp {
-	color: #999;
-	font-size: 14px;
-	font-style: italic;
-	float: right;
+  color: #999;
+  font-size: 14px;
+  font-style: italic;
+  float: right;
 }
 
 /*
@@ -256,48 +256,48 @@ Secondary Overlay
 */
 
 .secondary {
-	display: none;
-	position: absolute;
-	right: 0;
-	left: 0;
-	margin-right: auto;
-	margin-left: auto;
-	margin-top: 14px;
-	width: 65%;
-	min-height: 50%;
-	max-width: 540px;
-	z-index: 10;
-	background-color: rgba(80, 80, 80, 0.8);
-	color: #fff;
-	padding: 14px;
+  display: none;
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 14px;
+  width: 65%;
+  min-height: 50%;
+  max-width: 540px;
+  z-index: 10;
+  background-color: rgba(80, 80, 80, 0.8);
+  color: #fff;
+  padding: 14px;
 }
 
 .second-heading {
-	font-size: 24px;
-	font-weight: 500;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .second-feed {
-	margin-top: 24px;
+  margin-top: 24px;
 }
 
 .second-feed .tweetle {
-	background-color: rgba(70, 70, 70, 1);
+  background-color: rgba(70, 70, 70, 1);
 } 
 .secondary .btn {
-	background-color: rgba(105, 105, 105, 1);
+  background-color: rgba(105, 105, 105, 1);
 }
 
 .secondary .btn:active {
-	color: #6d6d6d;
-	background-color: rgba(235, 235, 235, 0.95);
+  color: #6d6d6d;
+  background-color: rgba(235, 235, 235, 0.95);
 }
 
 .secondary .timestamp {
-	color: #fff;
+  color: #fff;
 }
 
 .secondary .username:hover {
-	color: #fff;
-	cursor: default;
+  color: #fff;
+  cursor: default;
 }

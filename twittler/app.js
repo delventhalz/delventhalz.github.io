@@ -1,97 +1,121 @@
+/* * * * * * * * * * * * * * * * 
+ *      GLOBAL VARIABLES       *
+ * * * * * * * * * * * * * * * */
+
+var settings = {
+  interval: 3000,
+  timestampInterval: 5000,
+  slideSpeed: 300
+};
+
+var state = {
+  refreshing: true,
+  paused: true,
+  overlayUser: ''
+};
+
+var index = {
+  main: 0,
+  overlay: 0
+};
+
+// Global timer object prevents multiple timers being created
+var timer = {};
+
+// Couldn't figure out how to properly initialize visitor until I examined 
+// Rokas's code and discovered that I needed to set a string AND add a new 
+// array in streams.users with that string as the key (the part I was missing).
+visitor = 'you';
+streams.users[visitor] = [];
+
+
+/* * * * * * * * * * * * * * * * 
+ *      HELPER FUNCTIONS       *
+ * * * * * * * * * * * * * * * */
+
+// Immediately prints all tweetles before resuming regular refreshes
+var fillTweetles = function(user) {
+  if (user) {
+    while (index.overlay < streams.users[user].length) {
+      printTweetle(user);
+    }
+  } else {
+    while (index.main < streams.home.length) {
+      printTweetle();
+    }
+  }
+  
+  refreshTweetles(user);
+};
+
+// If refreshing, prints any new tweetles on each interval
+var refreshTweetles = function(user) {
+  if (user) {
+    if (state.refreshing &&  index.overlay < streams.users[user].length) {
+      printTweetle(user);
+    }
+    timer.overlay = setTimeout(function() {refreshTweetles(user)}, settings.interval);
+  } else {
+    if (state.refreshing && index.main < streams.home.length) {
+      printTweetle();
+    }
+    timer.main = setTimeout(refreshTweetles, settings.interval);
+  }
+};
+
+// Prints a single tweetle to the appropriate place in the DOM
+var printTweetle = function(user) {
+  var $tweetle = buildTweetle(user);
+
+  if (user) {
+    $tweetle.prependTo($('.second-feed'));
+    $('.second-feed').find('.tweetle').slideDown(settings.slideSpeed);
+    index.overlay++;
+  } else {
+    $tweetle.prependTo($('.feed'));
+    $('.feed').find('.tweetle').slideDown(settings.slideSpeed);
+    index.main++;
+  }
+}
+
+// Returns a jQuery object with a tweetle's HTML
+var buildTweetle = function(user) {
+  var tweetle = user ? streams.users[user][index.overlay] : streams.home[index.main];
+  var $tweetle = $('<div class="tweetle">' +
+    '<h6 class="timestamp clearfix" data-utc="' + tweetle.created_at + '">' + moment(tweetle.created_at).fromNow() + '</h6>' +
+    '<h4 class="username">@' + tweetle.user + '</h4>' +
+    '<p class ="message">' + tweetle.message + '</p></div>');
+  
+  return $tweetle;
+}
+
+// Refreshes the timestamp on all tweetles
+var refreshTimestamp = function() {
+  $('.feed').find('.timestamp').each(function() {
+    var utcTime = $(this).data("utc");
+    $(this).text(moment(utcTime).fromNow());
+  });
+  
+  $('.second-feed').find('.timestamp').each(function() {
+    var utcTime = $(this).data("utc");
+    $(this).text(moment(utcTime).fromNow());
+  });
+  
+  setTimeout(refreshTimestamp, settings.timestampInterval);
+}
+
+
+/* * * * * * * * * * * * * * * * 
+ *    RUNTIME AND LISTENERS    *
+ * * * * * * * * * * * * * * * */
+
 $(document).ready(function(){
-  var printed = 0; //the most recent main tweetle index to have been printed
-  var userPrinted = 0; //counts the tweetle index of the currently displayed user
-  var refresh = true; //whether or not the user wishes to see new tweetles
-  var paused = false; //whether a mouse hover is currently being used to pause refreshes
-  var user = ""; //current user in the overlay
   
-  //global timer objects prevent bug caused by multiple timers being created
-  var timer = undefined; 
-  var overlayTimer = undefined;
-  
-  //I couldn't figure out how to properly initialize visitor, and after a number of tries
-  //I examined Rokas's code and discovered that I needed to set a string AND initialize add that
-  //a new array in streams.users with that string as the key (the part I was missing).
-  visitor = "you";
-  streams.users[visitor] = [];
-  
-  
-  //returns the jQuery object for a tweetle's HTML
-  var createTweetle = function(index, user) {
-    var tweetle = user ? streams.users[user][index] : streams.home[index];
-    var $tweetle = $('<div class="tweetle">' +
-            '<h6 class="timestamp clearfix" data-utc="' + tweetle.created_at + '">' + moment(tweetle.created_at).fromNow() + '</h6>' +
-            '<h4 class="username">@' + tweetle.user + '</h4>' +
-            '<p class ="message">' + tweetle.message + '</p></div>');
-    
-    return $tweetle;
-  }
-  
-  //prints a single tweetle to the appropriate place in the DOM
-  var printTweetle = function(keyword) {
-    if (keyword === 'overlay') {
-      var $tweetle = createTweetle(userPrinted, user);
-      $tweetle.prependTo($('.second-feed'));
-      $('.second-feed').find('.tweetle').slideDown(300);
-      userPrinted++;
-    } else {
-      var $tweetle = createTweetle(printed);
-      $tweetle.prependTo($('.feed'));
-      $('.feed').find('.tweetle').slideDown(300);
-      printed++;
-    }
-  }
-  
-  //prints tweetles every half second if refresh is true and there are tweetles to print
-  var refreshTweetles = function(keyword) {
-    if (keyword === 'overlay') {
-      if (refresh &&  userPrinted <= streams.users[user].length - 1) {
-        printTweetle(keyword);
-      }
-      overlayTimer = setTimeout(function() {refreshTweetles(keyword)}, 500);
-    } else {
-      if (refresh && printed <= streams.home.length -1) {
-        printTweetle();
-      }
-      timer = setTimeout(function() {refreshTweetles()}, 500);
-    }
-  };
-  
-  //immediately prints all unprinted tweetles before resuming regular refreshes
-  var fillTweetles = function(keyword) {  
-    if (keyword === 'overlay') {
-      while (userPrinted <= streams.users[user].length - 1) {
-        printTweetle(keyword);
-      }
-    } else {
-      while (printed <= streams.home.length - 1) {
-        printTweetle();
-      }
-    }
-    
-    refreshTweetles(keyword);
-  }
-  
-  //refreshes the timestamp on every tweetle every second
-  var refreshTime = function() {
-    $('.feed').find('.timestamp').each(function() {
-      var utcTime = $(this).data("utc");
-      $(this).text(moment(utcTime).fromNow());
-    });
-    
-    $('.second-feed').find('.timestamp').each(function() {
-      var utcTime = $(this).data("utc");
-      $(this).text(moment(utcTime).fromNow());
-    });
-    
-    setTimeout(refreshTime, 1000);
-  }
-  
-  //allows the user to toggle tweetle refreshing
+  // Toggle tweetle refreshing
   $('.refresh').on('click', function() {
-    refresh = !refresh;
+    state.refreshing = !state.refreshing;
     
-    if (refresh){
+    if (state.refreshing){
       $(this).text('Stop Refresh');
       fillTweetles();
     } else {
@@ -99,59 +123,58 @@ $(document).ready(function(){
     }
   });
   
-  //allows the user to send their own tweetle
+  // Send a new tweetle
   $('.send').on('click', function() {
-    var messageBox = $(this).closest('.input').find('.user-message');
-    var message = messageBox.val();
+    var message = $('.user-message').val();
     if (message.length > 0) {
       writeTweet(message);
+      $('.user-message').val('');
     }
-    messageBox.val('');
     
-    //makes written tweets immediately appear, regardless of whether refresh is on
-    if (refresh) {
+    // Makes a new tweet appear, even when refresh is off
+    if (state.refreshing) {
       printTweetle();
     } else {
-      refresh = true;
+      state.refreshing = true;
       fillTweetles();
-      refresh = false;
+      state.refreshing = false;
     }
   });
   
-  //allows user to select individual usernames
-  //special thanks to Travis for pointing out that I needed to call a static parent element here
+  // Reveal overlay for specific user's tweets. Thanks to Travis for
+  // pointing out that I needed to use a static parent element here
   $('.feed').on('click', '.username', function() {
-    user = $(this).text().slice(1);
+    var user = $(this).text().slice(1);
     
     $('.second-heading').text("@" + user + "'s tweetles");
     $('.second-feed').children().remove();
-    $('.secondary').slideDown(300);
+    $('.secondary').slideDown(settings.slideSpeed);
 
-    userPrinted = 0;
-    fillTweetles('overlay');
+    index.overlay = 0;
+    fillTweetles(user);
   });
   
   $('.hide').on('click', function() {
-    $(this).closest('.secondary').slideUp(300);
+    $('.secondary').slideUp(settings.slideSpeed);
   });
   
-  //main feed tweetle refresh will pause on mouseover to allow for easier interaction
+  // Pause main tweeter refresh on mouseover
   $('.feed').on('mouseenter', '.tweetle', function() {
-    if(refresh) {
-      refresh = false;
-      paused = true;
+    if(state.refreshing) {
+      state.refreshing = false;
+      state.paused = true;
     }
   });
   
   $('.feed').on('mouseleave', '.tweetle', function() {
-    if (paused) {
-      refresh = true;
-      paused = false;
+    if (state.paused) {
+      state.refreshing = true;
+      state.paused = false;
       fillTweetles();
     }
   });
   
-  //initial call to begin loading tweetles and refreshing time
+  // Begin loading tweetles
   fillTweetles();
-  refreshTime();
+  refreshTimestamp();
 });

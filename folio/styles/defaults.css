@@ -1,13 +1,10 @@
 /******* MAIN *******/
-/*.confolio {
-  font: 300 16px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: #4d88ff;
-}*/
-
 .folio {
-  width: 36em;
+  font: 400 19px Lato, "Trebuchet MS", Helvetica, sans-serif;
+  width: 100%;
+  max-width: 38em;
   margin: 0 auto;
-  padding: 3em 1em;
+  padding: 4em 2em;
   background: #fff;
 }
 
@@ -15,41 +12,37 @@
 
 }
 
-
-
-/******* BONUSES *******/
-.line-count {
-  font-size: 0.9em;
-  color: #777;
-  float: right;
-  display: none;
+.dynamic {
+  font-size: 3vw;
+  padding: 4em 0.5em;
 }
 
-.syllable-count {
-  font-size: 0.7em;
-  color: #bbb;
-  float: right;
-  display: none;
+.dynamic .numbering {
+  width: 3em;
 }
 
 
 /******* HEADINGS *******/
 .folio h1 {
   font-size: 2em;
-  font-weight: 800;
+  font-weight: 900;
   margin: 2em auto;
 }
 
 .folio h2 {
   font-size: 1.5em;
-  font-weight: 800;
+  font-weight: 900;
   margin: 1em 0;
 }
 
 .folio h3 {
   font-size: 1.5em;
-  font-weight: 800;
+  font-weight: 900;
   margin-top: 1em;
+}
+
+.folio .title {
+
 }
 
 .folio .act {
@@ -62,7 +55,7 @@
 
 .folio .finis {
   font-size: 1.5em;
-  font-weight: 800;
+  font-weight: 900;
   margin-top: 1em;
 }
 
@@ -88,13 +81,14 @@
 }
 
 
+
 /******* DIALOGUE *******/
 .folio em {
   font-style: italic;
 }
 
 .folio p {
-  padding-bottom: 0.6em;
+  
 }
 
 .folio br {
@@ -102,11 +96,8 @@
 }
 
 
+
 /******* PUNCTUATION *******/
-.folio strong {
-
-}
-
 .folio .major {
 
 }
@@ -137,4 +128,25 @@
 
 .folio .char-stop {
 
+}
+
+
+
+/******* BONUSES *******/
+.numbering {
+  float: right;
+  width: 6em;
+}
+
+.syllable-count {
+  font-size: 0.7em;
+  color: #bbb;
+  display: none;
+}
+
+.line-count {
+  font-size: 0.9em;
+  color: #777;
+  float: right;
+  display: none;
 }

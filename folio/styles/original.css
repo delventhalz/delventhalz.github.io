@@ -1,0 +1,22 @@
+/******* INTERFACE STYLES *******/
+/* These styles should be toggled on by the interface:
+  TODO
+ */
+
+
+
+/******* MAIN *******/
+.content {
+  background-image: url("../images/parchment-bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.folio {
+  font: 400 19px "Merriweather", "Palatino Linotype", Palatino, serif;
+  background: rgba(256, 256, 256, 0.9);
+}
+
+.dynamic {
+  font-size: 3vw;
+}

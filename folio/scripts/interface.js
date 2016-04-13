@@ -1,5 +1,129 @@
-// Global variable to prevent multiple animations.
-// var animating = false;
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ *              GENERAL HELPERS                *
+ * * * * * * * * * * * * * * * * * * * * * * * */
+
+// Returns an array of all ids that match a class
+var getIds = function(className) {
+  if (className[0] !== '.') className = '.' + className;
+
+  return Array.prototype.reduce.call($(className), function(ids, elem) {
+      ids.push(elem.id); 
+      return ids;
+    }, []);
+};
+
+// Runs and empties a queue of functions stored in an array
+var runFunctions = function(funcArray) {
+  funcArray.reverse();
+  var func;
+
+  while ( func = funcArray.pop() ) {
+    func();
+  }
+};
+
+// Disappears and reappears changing content
+var animateChange = function(hidden, done) {
+  if (animating.now) {
+    if (hidden) animating.hiddens.push(hidden);
+    if (done) animating.dones.push(done);
+    return;
+  }
+
+  animating.now = true;
+
+  setTimeout(function() {
+    $('.content').fadeOut(animating.inTime, function() {
+      if (hidden) hidden();
+      runFunctions( animating.hiddens );
+
+      $('.content').fadeIn(animating.outTime, function() {
+        if (done) done();
+        runFunctions( animating.hiddens );
+        runFunctions( animating.dones );
+        animating.now = false;
+      });
+    });
+  }, animating.delay);
+};
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ *             INTERFACE FUNCTIONS             *
+ * * * * * * * * * * * * * * * * * * * * * * * */
+
+var populateSceneSelect = function() {
+  var anchorIds = $.makeArray(
+    $('.anchor').map(function(index, anchor) {
+    return $(anchor).attr('id');
+    })
+  );
+
+  $('#scene-select>.dropdown-menu').children().remove();
+
+  anchorIds.forEach(function(id) {
+    var actNumbers = { I: '1', II: '2', III: '3', IV: '4', V: '5' };
+    var act = actNumbers[ id.slice(0, -1) ];
+    var scene = id.slice(-1);
+
+    if (scene === '1') {
+      $('#scene-select>.dropdown-menu')
+      .append('<li><a href="#' + id + '" class="dropdown-header">Act ' + act + '</a></li>');
+    }
+
+    $('#scene-select>.dropdown-menu')
+    .append('<li><a href="#' + id + '">Scene ' + scene + '</a></li>');
+  });
+};
+
+// Sets a toggleable button(s) to on
+var toggleOn = function(id) {
+  if (Array.isArray(id)) {
+    return id.forEach(function(id) {
+      toggleOn(id);
+    });
+  }
+
+  if (id[0] !== '#') id = '#' + id;
+
+  if (!$(id).hasClass('active')) $(id).trigger('click');
+};
+
+// Sets toggleable button(s) to off
+// Sets all to off if no id is specified
+var toggleOff = function(id) {
+  if (Array.isArray(id)) {
+    return id.forEach(function(id) {
+      toggleOff(id);
+    });
+  }
+
+  if (!id) return toggleOff( getIds('.toggle') );
+
+  if (id[0] !== '#') id = '#' + id;
+
+  if ($(id).hasClass('active')) $(id).trigger('click');
+};
+
+var togglePreset = function(button, name) {
+  if ( $(button).hasClass('active') ) return;
+
+  // Animating this reloads page, so I sneak it in during later animations
+  setTimeout(function() {
+    $('.formatting').attr('href', styles[name].path);
+  }, animating.delay + animating.inTime);
+
+  toggleOff();
+  toggleOn(styles[name].toggles);
+
+  $('.preset').removeClass('active');
+  $(button).addClass('active');
+};
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ *              STYLE FUNCTIONS                *
+ * * * * * * * * * * * * * * * * * * * * * * * */
 
 // Adds a style tag to the head if it does not exist.
 var makeStyleTag = function (selector) {
@@ -15,21 +139,8 @@ var makeStyleTag = function (selector) {
   }
 };
 
-// Disappears and reappears changing content
-var animateChange = function(hidden, done) {
-  setTimeout(function() {
-
-    $('.content').fadeOut(600, function() {
-      if (hidden) hidden();
-      $('.content').fadeIn(1200, function() {
-        if (done) done();
-      });
-    });
-  }, 200);
-};
-
-// Toggles a particular CSS style on or off in the whole document. 
-// Note that an off state must be provided in order to override existing styles.
+// Toggles a particular CSS style on or off in the whole document
+// Note that an off state must be provided in order to override existing styles
 var toggleStyle = function (selector, style, on, off) {
   var id = '#' + selector.replace('.', '').replace('#', '') + '-' + style;
   makeStyleTag(id);
@@ -56,56 +167,6 @@ var toggleSizeStyle = function (selector, style, size) {
   });
 };
 
-// Returns an array of all ids that match a class
-var getIds = function(className) {
-  if (className[0] !== '.') className = '.' + className;
-
-  return Array.prototype.reduce.call($(className), function(ids, elem) {
-      ids.push(elem.id); 
-      return ids;
-    }, []);
-};
-
-// Sets a toggleable button(s) to on.
-var toggleOn = function(id) {
-  if (Array.isArray(id)) {
-    return id.forEach(function(id) {
-      toggleOn(id);
-    });
-  }
-
-  if (id[0] !== '#') id = '#' + id;
-
-  if (!$(id).hasClass('active')) $(id).trigger('click');
-};
-
-// Sets a toggleable button(s) to off.
-// Will set all to off if no id is specified.
-var toggleOff = function(id) {
-  if (Array.isArray(id)) {
-    return id.forEach(function(id) {
-      toggleOff(id);
-    });
-  }
-
-  if (!id) return toggleOff( getIds('.toggle') );
-
-  if (id[0] !== '#') id = '#' + id;
-
-  if ($(id).hasClass('active')) $(id).trigger('click');
-};
-
-var togglePreset = function(button, name) {
-  if ( $(button).hasClass('active') ) return;
-
-  toggleOff();
-  $('.formatting').attr('href', styles[name].path);
-  toggleOn(styles[name].toggles);
-
-  $('.preset').removeClass('active');
-  $(button).addClass('active');
-};
-
 var setSceneVisibility = function() {
   if (!settings.displayAll && settings.scene) {
     $('.anchor').hide();
@@ -115,30 +176,33 @@ var setSceneVisibility = function() {
   }
 };
 
-var populateSceneSelect = function() {
-  var anchorIds = $.makeArray(
-    $('.anchor').map(function(index, anchor) {
-    return $(anchor).attr('id');
-    })
-  );
-
-  $('#scene-select>.dropdown-menu').children().remove();
-
-  anchorIds.forEach(function(id) {
-    var actNumbers = { I: '1', II: '2', III: '3', IV: '4', V: '5' };
-    var act = actNumbers[ id.slice(0, id.length-1) ];
-    var scene = id.slice(id.length-1);
-
-    if (scene === '1') {
-      $('#scene-select>.dropdown-menu')
-      .append('<li><a href="#' + id + '" class="dropdown-header">Act ' + act + '</a></li>');
-    }
-
-    $('#scene-select>.dropdown-menu')
-    .append('<li><a href="#' + id + '">Scene ' + scene + '</a></li>');
-  });
+var setDynamicText = function() {
+  if ($(window).width() < settings.resizeWidth) {
+    $('.folio').addClass('dynamic');
+  } else {
+    $('.folio').removeClass('dynamic');
+  }
 };
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ *                 LISTENERS                   *
+ * * * * * * * * * * * * * * * * * * * * * * * */
+
+// Move stage direction tags to after numbering tags
+// (affects appearance when directions have block display)
+Array.prototype.forEach.call($('.direction'), function(direction){
+  var numbering = $(direction).nextAll('.numbering')[0];
+
+  if (numbering) $(direction).detach().insertAfter(numbering);
+});
+
+
+// Text resizing
+setDynamicText();
+$(window).on('resize', function() {
+  setDynamicText();
+});
 
 // General Button Behavior
 $('.toggle').on('click', function() {
@@ -146,17 +210,23 @@ $('.toggle').on('click', function() {
 });
 
 
+// Play selection
 $('#play-selection').autocomplete({
   lookup: plays,
+
   onSelect: function (suggestion) {
     animateChange(function() {
       $('.content').children().remove();
       $.get(suggestion.path, function(data) {
         $('.content').append(data);
         populateSceneSelect();
+        if ( !$('.preset').hasClass('active') ) {
+          $('#modern-preset').trigger('click');
+        }
       });
     });
   }
+
 });
 
 $('#scene-select>.dropdown-menu').on('click', 'a', function() {
@@ -166,12 +236,13 @@ $('#scene-select>.dropdown-menu').on('click', 'a', function() {
 
 $('#display-box').on('click', function() {
   animateChange(function() {
-    settings.displayAll = $(this).prop('checked');
+    settings.displayAll = $('#display-box').prop('checked');
     setSceneVisibility();
   });
 });
 
 
+// Presets
 $('#modern-preset').on('click', function() {
   togglePreset(this, 'modern');
 });

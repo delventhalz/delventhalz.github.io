@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "clean up your code with single-line conditionals"
+title:  "Slim Down Your Code with Single-Line Conditionals"
 date:   2016-01-23 13:55:00 -0600
 categories: javascript
 ---

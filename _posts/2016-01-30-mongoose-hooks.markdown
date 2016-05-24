@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "the how's why's and wtf's of mongoose hooks"
+title:  "The How's Why's and WTF's of Mongoose Hooks"
 date:   2016-01-30 14:15:16 -0600
 categories: javascript
 ---

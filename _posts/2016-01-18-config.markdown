@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "config files for security and convenience"
+title:  "Config Files for Security and Convenience"
 date:   2016-01-18 21:55:00 -0600
 categories: javascript
 ---

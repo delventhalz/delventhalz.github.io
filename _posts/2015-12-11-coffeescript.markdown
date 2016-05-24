@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "supercaffeinate with a CoffeeScript primer"
+title:  "Super Caffeinate with a CoffeeScript Primer"
 date:   2015-12-11 23:39:00 -0600
 categories: javascript coffeescript
 ---

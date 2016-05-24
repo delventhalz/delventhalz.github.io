@@ -13,6 +13,7 @@ So say hello to [Replacer.js](https://github.com/delventhalz/replacer.js). Repla
 Currently just a 0.1 release, expect a few more updates from me in the near future to flesh out some features before I leave it for others to play with if they so desire. Complete instructions are in the github readme, but here are the highlights:
 
 ### Installing
+
 First thing to do is to install Node.js and npm. If you don't know how to do that, [you'll find great instructions here](https://docs.npmjs.com/getting-started/installing-node). You'll also want to go to [Replacer.js's github page](https://github.com/delventhalz/replacer.js) and download a zip of the files. Afterwards, open up your command line, navigate over to Replacer's directory and type:  
 
 ```
@@ -22,6 +23,7 @@ npm install
 Npm will automatically install Replacer.js's dependencies ([readline-sync](https://github.com/anseki/readline-sync) and [spellchecker](https://github.com/atom/node-spellchecker), if your curious), and you are ready to run it.
 
 ### Usage
+
 By default Replacer.js will read and change text from the `target.txt` file provided, and save changed and ignored words to the `cipher.json` and `ignore.json` files in the `words/` directory. To run replacer with these defaults, simply type into your command line:
 
 ```
@@ -37,6 +39,7 @@ node replacer macbeth.txt midsummer/act1.txt
 In future versions you will also be able to specify different JSON files.
 
 ### Shortcuts
+
 When running, Replacer will prompt you with any misspelled word containing a 'u', 'v', 'j', or 'i' that it hasn't seen before. That character list is currently hard-coded in, but will soon be easily customizable through another JSON file. When prompted, you can simply ignore the word by pressing enter, type in a new spelling, or use shortcuts to make quick switches. For example, consider the following possible prompts and user responses:
 
 ```
@@ -54,4 +57,5 @@ vnproued? *
 In the preceding example *'thinke'* will be unchanged, *'ioyes'* will become 'joyes', *'reuiu'd'* will become 'reviv'd', *'successiue'* will become 'successive', and *'vnproued'* will become 'unproved'. And Replacer.js will remember the change, never asking about the same word twice.
 
 ### That's it!
+
 I had a lot of fun building this tool, and I look forward to using it fthe next time I teach a class on the bard. I'm not sure anyone else will find it useful, but hopefully it's modular enough thatnsomeone out there can put it to a new purpose. In the meantime, lookout for a new blogpost from me detailing the process of building your own Node.js tool.

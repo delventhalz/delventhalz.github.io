@@ -9,6 +9,7 @@ So, you've been over the [Node.js](https://nodejs.org/en/) and [Express](http://
 But you've got a bit of a problem. You've put all your work on GitHub and now all those precious precious API keys you signed up for are as easily visible as the rest of your code. All someone has to do is glance at your repo and soon they'll be guzzling up twitter feed requests in your name! Maybe you've got some other bits and pieces to guard, like perhaps the secret you're using for your session. What to do?
 
 ### Enter config.js
+
 A common practice for keeping sensitive information away from your version control system, but still available to your application, is to use a config file. The concept is fairly simple: put all those api keys into a seperate file, add that file to your `.gitignore`. Since it *is* a configuration file, you could also use it to store various other settings if that's convenient. Just keep in mind, any updates here will not be pushed to github.
 
 The file itself is fairly simple. Just save the keys as strings, preferably with variable names in ALL_CAPS as this is the JS convention for constant variables which should not be altered. If you're using a JavaScript file, finish up by making sure you set up the module.exports object for Node.js:
@@ -41,6 +42,7 @@ app.use( session({ secret: SESSION_SECRET }) );
 You're done! Now your API keys and other secrets are stashed away from prying eyes on github. But I think we can simplify this a bit more.
 
 ### No logic? Use JSON.
+
 Why bother writing out an entire JavaScript file when we're just trying to save a few variables. If we aren't planning to actually write any logic into our config file, JSON will suit just fine. Let's do a quick refactor:
 
 {% highlight javascript %}
@@ -61,6 +63,7 @@ var SESSION_SECRET = require('./config.json').SESSION_SECRET;
 As an added bonus, I also like to use the JavaScript convention for private variables and name the file `_config.json` if I'm not planning on making it public. It's a nice reminder that no one should be passing the file around, though obviously this has no effect on the way the code actually runs.
 
 ### And The Client?
+
 So what if you are making API calls from the client-side? That's a much thornier issue. Even if your sensitive client code isn't on GitHub, it's still on . . . the client. Ultimately anything in your client code is not going to be safe without some pretty complex workarounds like PHP wrappers or some sort of hashing scheme, both of which are beyond the scope of this blog post. 
 
 But depending on your needs, there are a couple of simpler options which might help. First, consider whether or not your client really has to be the one making API calls. Potentially the server could handle it all and then just send the data along. But, depending on how often these calls are made, or how much data they handle, this may be a poor solution as you've just added a somewhat extraneous networking middleman.

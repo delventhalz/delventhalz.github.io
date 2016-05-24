@@ -7,6 +7,7 @@ categories: javascript
 So you've been programming in JavaScript for a little while now. Your code is getting lean and mean and DRY as a California reservoir. Maybe you've even started to take advantage of some of JavaScript's single-line conditionals and you're wondering just how deep this rabbit hole goes. Maybe you have no idea what I'm talking about when I say "single-line conditionals". Whether you're a doe-eyed newbie or a hardened professional, this post has some fancry tricks you may be interested in.
 
 ### Braces Optional
+
 The traditional way to write an if statement looks something like this:
 
 {% highlight javascript %}
@@ -49,6 +50,7 @@ else rethinkMath();
 Simple. Readable. Short. My favorite kind of code. Technically you can do the same thing with `else if`'s too, though in that case I might add a bit of white space back in to help with readability. Of course, if your plan was *if/else* all along, there may be a better tool:
 
 ###The Ternary Operator
+
 The ternatory operator (so named because it takes three operands), is one of the more intimidating pieces of JavaScript syntax a new coder is likely to encounter. It looks strange and alien, and the way it works is sometimes profoundly unclear. However, if you really want to save space, you can write the above `if else` statement in one single line:
 
 {% highlight javascript %}
@@ -84,6 +86,7 @@ if (five > 4) {
 Gross.
 
 ### The Case For Defaults
+
 It turns out that there are more operators we can press into service to make our conditionals cleaner. One common example is to use the logical OR (`||`) to create default values in functions. For example:
 
 {% highlight javascript %}
@@ -106,6 +109,7 @@ Same effect. Less Code. More readable. And imagine the alternate version using `
 But how does this bizarre hack of the OR operator actually work? The secret is in how JavaScript handles logical operators. In the case of `||`, JS is trying to determine whether either of the two operands is "truthy". As soon as it sees the first one is, there is no reason to bother with the second. So it doesn't. Does that mean we can use `&&` to write single-line conditionals too?
 
 ###Using && to Write Single-Line Conditionals
+
 Similar to the logical OR, `&&` checks to see if either of two operands is *falsey*. If the first operand is, there is no point in checking the second. *(REMEMBER! Falsey values in JavaScript include `false`, `0`, `''`, `undefined`, and `null`. Everything else is truthy.)*
 
 This behavior is not used nearly as often as `||`, but I did just write some actual server code that I couldn't have been done any other way:
@@ -154,6 +158,7 @@ if (i === users.length) return next && next();
 If `next` is undefined, JavaScript has no need to evaluate `next()`, and will simply skip it, returning the value to the left (`undefined`, which is fine for my purposes). On the other hand, if `next` is a function (i.e. truthy), JS will look at the value on the right, see that there is a function that needs to be executed, and do so. A fairly complex series of operations have been reduced to one simple (okay, not that simple) line.
 
 ###With Great Power...
+
 To me, JavaScript is the ultimate "eh, sure I guess", language. Can I just call undefined false? 
 *"Eh, sure I guess."* 
 Can I get rid of these curly braces? 

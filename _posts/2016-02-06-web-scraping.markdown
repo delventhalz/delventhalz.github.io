@@ -11,6 +11,7 @@ Now *you* have to build a web scraper. How hard could it be?
 Don't you worry friend. We'll do it together.
 
 ###Make the Client Do the Work
+
 Web scraping is not terribly resource intensive, but maybe you're dreaming big and want to do a live scrape for every link anytime one of your users looks at it. No problem, add it to the client code and keep the extra load off your server!
 
 Yeah . . . no. Unfortunately, because of browsers' [same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy), it is not possible for the client to fetch html from anywhere but your own server (or other servers that have explictly whitelisted it ahead of time). In order to avoid using your own server, you're basically going to have to [hook into some proxy service](http://stackoverflow.com/questions/15005500/loading-cross-domain-html-page-with-ajax), which really isn't helping anything.
@@ -18,6 +19,7 @@ Yeah . . . no. Unfortunately, because of browsers' [same-origin policy](https://
 So let's just build the scraper on our own server.
 
 ###Your Tools
+
 Your going to want to head over to your console and `npm install` [request](https://github.com/request/request) and [cheerio](https://github.com/cheeriojs/cheerio).
 
 **Request** is the standard for server-side http requests. It makes it dead simple to send GET, POST or whatever requests to whereever you want. Even better, install [request-promise](https://github.com/request/request-promise) instead of request, to get all that request goodness with some clean and clear [Bluebird](http://bluebirdjs.com/docs/getting-started.html) promises baked in.
@@ -25,6 +27,7 @@ Your going to want to head over to your console and `npm install` [request](http
 Meanwhile, **Cheerio** is a server-side implementation of [jQuery](https://jquery.com). You are going to be parsing through some html files in a second, and you are *definitely* going to want access to jQuery syntax when you do it.
 
 ###Fetching the HTML
+
 Using `request-promise` to get the html you want couldn't be simpler:
 
 {% highlight javascript %}
@@ -39,6 +42,7 @@ request(url)
 That's it. So now that we have html, what do we do with it? What goes into that little `scrape` function there?
 
 ###Cheerio And You
+
 Cheerio requires a little bit of extra setup. After `require`ing it normally, you'll have to use the `load` method to create a jQuery-like `$` object containing all of the HTML you're planning on scraping. So if your goal was just to return the `title` of that webpage we requested earlier, your `scrape` function might look like this:
 
 {% highlight javascript %}
@@ -54,6 +58,7 @@ var scrape = function(html) {
 Once properly loaded, cheerio works identically to jQuery, giving you access to all the same selectors and methods you would normally have on the front-end. So now that you have all of this power, what do you do with it?
 
 ###Meta Is The New Meta
+
 Who knows what information you were hoping to grab with your web-scraper, but there's a good chance that whatever it is is contained in the site's *metadata*. With the rise of social networks, most webpages are hoping to be shared, liked, tweeted, upvoted, or pinned. Enter the `meta` tag. Designed to contain information about a site's title, subject matter, authorship, and more, these tags are left in the `head` of a page just for an enterprising new social media guru like yourself (but mostly for Facebook). For example, here's an edited sample from the source for a [Udemy](https://www.udemy.com/) course:
 
 {% highlight html %}
@@ -143,6 +148,7 @@ var targets = require(./targets.json);
 var scrape = function(html) {
   var $ = cheerio.load(html);
 
+  // This function cycles through possible meta tags until it finds a match
   var scrapeFor = function(type) {
     for(var i = 0; i < targets[type].length; i++) {
       var prop = targets[type].prop;

@@ -18,6 +18,7 @@ In this paradigm, the tests essentially serve as a rough outline for your code. 
 So how can we make writing tests as painless as possible? Thankfully are a [variety of testing libraries](http://www.creativebloq.com/javascript/essential-javascript-top-five-testing-libraries-10126048) out there to help simplify and streamline the process. Today, we're going to talk about one called [Jasmine](http://jasmine.github.io/).
 
 ### Getting Started
+
 As you might expect, Jasmine has an npm module which you can install easily enough through your command line: 
 
 ```
@@ -43,6 +44,7 @@ jasmine
 ```
 
 ### Writing a Test
+
 Jasmine tests are built on fairly simple syntax, designed to look more or less like english. Well, english with a lot of extra dots and anoymous functions.
 
 {% highlight javascript %}
@@ -100,6 +102,7 @@ describe('Arithmatic', function() {
 Note that there is a fair amount of freedom to how you mix and match your `describe`, `it`, and `expect` statements. `describe` blocks can contain other `describe` blocks, and `it` blocks can be nested at the same level as those describes. But you would never place a `describe` block *within* an `it` block, and an `it` block must be contrained within *at least one* `describe`. Additionally, you can stack as many `expect` statements as you like within an `it`. Every `expect` must succeed for the test to pass.
 
 ### Before and After
+
 Frequently you will want to execute code before and/or after each of your tests. Rather than copying and pasting that code within every `it` block, Jasmine provides you with the `beforeEach` and `afterEach` functions:
 
 {% highlight javascript %}
@@ -175,4 +178,5 @@ expect(3.14).toBeCloseTo(3.1, 1);
 There are a handful of other matchers out there as well, which you can find explanations of in [Jasmine's documentation](http://jasmine.github.io/), including `toBeNull`, `toBeGreaterThan`, `toBeLessThan`, `toThrow` (for exceptions), and `toMatch` (for regex, i.e. regular expressions).
 
 ### Now Go Write Some Tests!
+
 Test driven development is the basis for smart, focused, effecient coding. It allows you to spend less time wondering what to do next and helps you avoid project-breaking bugs before they begin. All the tools you need to build these tests are easy and available. So what you waiting for?

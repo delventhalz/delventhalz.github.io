@@ -4,6 +4,7 @@ title:  "Super Caffeinate with a CoffeeScript Primer"
 date:   2015-12-11 23:39:00 -0600
 categories: javascript coffeescript
 ---
+
 Today's Hack Reactor lesson got off to a challenging start with the sudden introduction of [CoffeeScript](http://coffeescript.org/), the "little language that compiles into JavaScript." The idea is to give JavaScript developers a way of writing code that is both shorter and cleaner, then compile that code into readable JavaScript. With relatively surprisingly few new commands, CoffeeScript succeeds at rounding off some of JS's rough edges, and even adds a bit of new functionality.
 
 But despite that svelte profile, there was still a lot of new syntax to take in all at once. A cheat sheet seemed like the way to go, but most of what I found online was cluttered, difficult to read, and sometimes pages long. I wanted a quick reference guide, not an entire tutorial.
@@ -14,6 +15,7 @@ If that's all you were looking for, click on the link and give it a download. On
 
 
 ###Installing and  Running CoffeeScript###
+
 CoffeeScript is installed with [Node.js](https://nodejs.org/)'s package manager, npm. If you don't know what that is, or don't have it installed, you're going to want to get that done first. Afterwards, installing CoffeeScript is as simple as going into your command line and typing:
 
 ```
@@ -30,6 +32,7 @@ In this case we are telling CoffeeScript to compile every `.coffee` file in our 
 
 
 ###The Highlights of CoffeeScript###
+
  **No `;` or `{}`, and not nearly as much `()`.** CoffeeScript is designed to read a lot like english, so it does away with much of the more extraneous punctuation.
 
  **No `var` keyword. At all.** You'll actually break things if you try to throw `var` in there. Just assign values directly to a variables, and CoffeeScript will automatically instantiate them at the top of the current scope.
@@ -48,6 +51,7 @@ In this case we are telling CoffeeScript to compile every `.coffee` file in our 
 
 
 ###Code Comparison!###
+
 Let's see it in action:
 
 {% highlight coffeescript %}
@@ -100,6 +104,7 @@ for (var k = 2; k < 7; k++) {
 
 
 ###The Cheat Sheet###
+
 And finally, the cheat sheet linked above. It is by no means exhaustive, but contains examples of most of the most useful CoffeeScript syntax, along with some brief explanations where necessary. Use it as you'd like, and may your JavaScript be a little more caffeinated. 
 
 <a href="/images/coffeescript-cheat-sheet.pdf"><embed src="/images/coffeescript-cheat-sheet.pdf" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html"></a>

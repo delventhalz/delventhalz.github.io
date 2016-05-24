@@ -43,7 +43,7 @@ That's it. So now that we have html, what do we do with it? What goes into that 
 
 ### Cheerio And You
 
-Cheerio requires a little bit of extra setup. After `require`ing it normally, you'll have to use the `load` method to create a jQuery-like `$` object containing all of the HTML you're planning on scraping. So if your goal was just to return the `title` of that webpage we requested earlier, your `scrape` function might look like this:
+Cheerio requires a little bit of extra setup. After `require`ing it normally, you use the `load` method to create a jQuery-like `$` object with all of the HTML you're planning to scrape. So, if your goal was just to return the `title` of a webpage we, you code might look something like this:
 
 {% highlight javascript %}
 var cheerio = require('cheerio');
@@ -57,41 +57,39 @@ var scrape = function(html) {
 
 Once properly loaded, cheerio works identically to jQuery, giving you access to all the same selectors and methods you would normally have on the front-end. So now that you have all of this power, what do you do with it?
 
-### Meta Is The New Meta
+### `meta` Is So Meta
 
-Who knows what information you were hoping to grab with your web-scraper, but there's a good chance that whatever it is is contained in the site's *metadata*. With the rise of social networks, most webpages are hoping to be shared, liked, tweeted, upvoted, or pinned. Enter the `meta` tag. Designed to contain information about a site's title, subject matter, authorship, and more, these tags are left in the `head` of a page just for an enterprising new social media guru like yourself (but mostly for Facebook). For example, here's an edited sample from the source for a [Udemy](https://www.udemy.com/) course:
+There's a good chance that whatever information you wanted to scrape can be found in a site's *metadata*. With the rise of social networks, most webpages are hoping to be shared, liked, tweeted, upvoted, pinned, or übermensched. Enter the `meta` tag. Designed to contain information about a site's title, subject matter, authorship, and more, these tags are left in the `head` of a page for an enterprising social media gurus like yourself (and Facebook, mostly Facebook). For example, here's an edited sample from the source for a [Udemy](https://www.udemy.com/) course:
 
 {% highlight html %}
-<!DOCTYPE html>
-<html lang="en-us" >
-  <head>
-    <title>Advanced React and Redux | Udemy</title>
+<head>
+  <title>Advanced React and Redux | Udemy</title>
 
-    <meta name="title" content="The Professional Ruby on Rails Developer - Udemy">
-    <meta property="udemy_com:category" content="Development">
-    <meta property="udemy_com:instructor" content="https://www.udemy.com/user/sgslo/">
+  <meta name="title" content="Advanced React and Redux - Udemy">
+  <meta property="udemy_com:category" content="Development">
+  <meta property="udemy_com:instructor" content="https://www.udemy.com/user/sgslo/">
 
-    <meta property="og:title" content="Advanced React and Redux - Udemy">
-    <meta property="og:url" content="https://www.udemy.com/react-redux-tutorial/">
-    <meta property="og:description" content="Detailed walkthroughs on advanced React and Redux concepts - Authentication, Testing, Middlewares, HOC&#39;s, and Deployment">
-    <meta property="og:image" content="https://udemy-images.udemy.com/course/480x270/781532_8b4d_6.jpg">
+  <meta property="og:title" content="Advanced React and Redux - Udemy">
+  <meta property="og:url" content="https://www.udemy.com/react-redux-tutorial/">
+  <meta property="og:description" content="Detailed walkthroughs on advanced React and Redux concepts - Authentication, Testing, Middlewares, HOC&#39;s, and Deployment">
+  <meta property="og:image" content="https://udemy-images.udemy.com/course/480x270/781532_8b4d_6.jpg">
 
-    <meta name="twitter:title" content="Advanced React and Redux - Udemy">
-    <meta name="twitter:url" content="https://www.udemy.com/react-redux-tutorial/">
-    <meta name="twitter:description" content="Detailed walkthroughs on advanced React and Redux concepts - Authentication, Testing, Middlewares, HOC&#39;s, and Deployment">
-    <meta name="twitter:image" content="https://udemy-images.udemy.com/course/480x270/781532_8b4d_6.jpg">
+  <meta name="twitter:title" content="Advanced React and Redux - Udemy">
+  <meta name="twitter:url" content="https://www.udemy.com/react-redux-tutorial/">
+  <meta name="twitter:description" content="Detailed walkthroughs on advanced React and Redux concepts - Authentication, Testing, Middlewares, HOC&#39;s, and Deployment">
+  <meta name="twitter:image" content="https://udemy-images.udemy.com/course/480x270/781532_8b4d_6.jpg">
 
-    <meta itemprop="name" content="Advanced React and Redux - Udemy">
-    <meta itemprop="url" content="https://www.udemy.com/react-redux-tutorial/">
-    <meta itemprop="description" content="Detailed walkthroughs on advanced React and Redux concepts - Authentication, Testing, Middlewares, HOC&#39;s, and Deployment">
-    <meta itemprop="image" content="https://udemy-images.udemy.com/course/480x270/781532_8b4d_6.jpg">
+  <meta itemprop="name" content="Advanced React and Redux - Udemy">
+  <meta itemprop="url" content="https://www.udemy.com/react-redux-tutorial/">
+  <meta itemprop="description" content="Detailed walkthroughs on advanced React and Redux concepts - Authentication, Testing, Middlewares, HOC&#39;s, and Deployment">
+  <meta itemprop="image" content="https://udemy-images.udemy.com/course/480x270/781532_8b4d_6.jpg">
 
-  </head>
+</head>
 {% endhighlight %}
 
 Well hello metadata. So what is all of this? Well, there isn't yet any standard metadata system, and since `meta` tags are basically roll-your-own, most social networks have. The `og` tags are used by Facebook, the `twitter` tags by Twitter. Udemy has even built some of their own custom `udemy_com` tags. Most sites will try to cover all of their bases, and include a hodge-podge of tags, many redundant, just to make sure they don't spoil their chances of being the next viral sensation.
 
-In all cases you are going to use `attr('content')` to get the information you need from the meta tag, but the selector is a little more complicated. Standard class or id selectors obviously won't work, which is why you'll want the attribute selector. For the Twitter title, that would look like `$('meta[name="twitter:title"]')`. For the OG title, it would be `$('meta[property="og:title"]')`. Armed with these tools, we could write a simple scraper like this:
+In all of these cases you'll use `attr('content')` to get the information you need from the meta tag, but the selector is a little more complicated. Standard class or id selectors obviously won't work, which is why you'll want jQuery's attribute selector. For the Twitter title for example, that would look like `$('meta[name="twitter:title"]')`. For the OG title, it would be `$('meta[property="og:title"]')`. Armed with these tools, we could easily write a simple metadata scraper:
 
 {% highlight javascript %}
 var cheerio = require('cheerio');
@@ -111,11 +109,14 @@ This code will work assuming every site always uses Facebook metadata, which is 
 
 ### Keep It Organized With JSON
 
-What we want are an array of possible tags we should have Cheerio cycle through until it finds something. This is exactly the sort of data we can store out of the way in a seperate JSON file. For example, if we wanted to design a slightly more robust scraper for title and description, the JSON file might look like this:
+What we want is an array of possible tags we can have Cheerio cycle through until it finds a match. This is exactly the sort of data we can store out of the way in a seperate JSON file. For example, if we wanted to design a slightly more robust scraper for title and description, the JSON file might look like this:
 
 {% highlight json %}
 {
   "title": [{
+    "prop": "name", 
+    "val": "title"
+  }, {
     "prop": "itemprop", 
     "val": "name"
   }, {
@@ -167,4 +168,4 @@ var scrape = function(html) {
 };
 {% endhighlight %}
 
-The big advantage of this architecture, is that as you discover new pages with weird tags, adding them is as simple as creating a new element in one of your arrays. Of course, if you ever want to scrape something *other* than `meta` tags, your code will have to get a fair amount more complicated (heaven help you if you start scraping `text`), but I'm sure you can handle it.
+The big advantage of this architecture, is that as you discover new pages with weird tags, adding them is as simple as creating a new element in one of your arrays. Of course, if you ever want to scrape something *other* than `meta` tags, your code will have to get a fair amount more complicated (heaven help you if you start scraping `text`), but I'm sure you can figure out the details for yourself.

@@ -11,7 +11,7 @@ Until last week.
 Last week Hack Reactor dropped a bombshell of lesson on me. The mists parted, and three of the most confusing keywords in JavaScript suddenly made sense. It all starts with <a href="https://en.wikipedia.org/wiki/Class_(computer_programming)" title="extensible templates for creating objects, providing initial values for properties and implementations of behavior (methods)">classes</a>. You see, while some languages are built from the ground up to support object-oriented tools, JavaScript is not one of those languages. So the ways you can build a class are a little more . . . improvised.
 
 
-###Functional Style Classes###
+### Functional Style Classes
 
 {% highlight javascript %}
 var makeDude = function(name) {
@@ -37,7 +37,7 @@ Functional classes are perhaps the most straightforward of the bunch. You want a
 But, what if we need to make thousands of dudes? Suddenly that greeting function, which is identical for each dude, is starting to hog a lot of memory, needlessly getting remade over and over again. Wouldn't it be nice if there were a way all the dudes could share one greeting?
 
 
-###Functional-Shared Classes###
+### Functional-Shared Classes
 
 {% highlight javascript %}
 var makeDude = function(name) {
@@ -82,7 +82,7 @@ bob.greeting(); // "Who has 2 thumbs? Bob does!"
 The keyword `this` gets thrown around a lot in JavaScript, with big words like *"runtime context"*, but just think of it as a parameter, and your life will be much easier. The big exception is when you try to use `this` in a function that was called without any object to the left of the dot. In that case, it just ends up pointing to the *"global scope"* (usually the browser window), which is a useless and kind of confusing feature. But hey. JavaScript.
 
 
-###Prototypal Style Classes###
+### Prototypal Style Classes
 
 {% highlight javascript %}
 var makeDude = function(name) {
@@ -111,7 +111,7 @@ The Prototypal method of creating classes in JavaScript, despite its name, does 
 Easy enough, but whatever happened to `new` and `prototype`?
 
 
-###Pseudoclassical Style Classes###
+### Pseudoclassical Style Classes
 
 {% highlight javascript %}
 var Dude = function(name) {
@@ -146,7 +146,7 @@ var Dude = function(name) {
 Almost identical to our Prototypal class from before! We can clearly see why `this` doesn't refer to the browser window. The very first line of the code now explicitly sets `this` to be something else. JavaScript could have used "obj", "instance", or anything else to store the copy of `prototype`, but the designers chose `this`. It was already a reserved word and would otherwise serve little purpose inside a constructor function like `Dude`. A decision that would later confuse thousands of new developers like me, and possibly you. 
 
 
-> ###TL;DR###
+### TL;DR
 
 > * JavaScript was not built with classes in mind, and so has had to hack together different, sometimes odd, ways of creating them.
 > * The keyword `this` is basically just another parameter for your functions, and will always refer to the object that called the function (i.e. for "obj.func()", obj is`this`).

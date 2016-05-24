@@ -49,7 +49,7 @@ else rethinkMath();
 
 Simple. Readable. Short. My favorite kind of code. Technically you can do the same thing with `else if`'s too, though in that case I might add a bit of white space back in to help with readability. Of course, if your plan was *if/else* all along, there may be a better tool:
 
-###The Ternary Operator
+### The Ternary Operator
 
 The ternatory operator (so named because it takes three operands), is one of the more intimidating pieces of JavaScript syntax a new coder is likely to encounter. It looks strange and alien, and the way it works is sometimes profoundly unclear. However, if you really want to save space, you can write the above `if else` statement in one single line:
 
@@ -85,7 +85,7 @@ if (five > 4) {
 
 Gross.
 
-### The Case For Defaults
+###  The Case For Defaults
 
 It turns out that there are more operators we can press into service to make our conditionals cleaner. One common example is to use the logical OR (`||`) to create default values in functions. For example:
 
@@ -108,7 +108,7 @@ Same effect. Less Code. More readable. And imagine the alternate version using `
 
 But how does this bizarre hack of the OR operator actually work? The secret is in how JavaScript handles logical operators. In the case of `||`, JS is trying to determine whether either of the two operands is "truthy". As soon as it sees the first one is, there is no reason to bother with the second. So it doesn't. Does that mean we can use `&&` to write single-line conditionals too?
 
-###Using && to Write Single-Line Conditionals
+### Using && to Write Single-Line Conditionals
 
 Similar to the logical OR, `&&` checks to see if either of two operands is *falsey*. If the first operand is, there is no point in checking the second. *(REMEMBER! Falsey values in JavaScript include `false`, `0`, `''`, `undefined`, and `null`. Everything else is truthy.)*
 
@@ -157,7 +157,7 @@ if (i === users.length) return next && next();
 
 If `next` is undefined, JavaScript has no need to evaluate `next()`, and will simply skip it, returning the value to the left (`undefined`, which is fine for my purposes). On the other hand, if `next` is a function (i.e. truthy), JS will look at the value on the right, see that there is a function that needs to be executed, and do so. A fairly complex series of operations have been reduced to one simple (okay, not that simple) line.
 
-###With Great Power...
+### With Great Power...
 
 To me, JavaScript is the ultimate "eh, sure I guess", language. Can I just call undefined false? 
 *"Eh, sure I guess."* 

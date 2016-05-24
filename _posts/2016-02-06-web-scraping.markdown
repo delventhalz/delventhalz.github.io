@@ -10,7 +10,7 @@ Now *you* have to build a web scraper. How hard could it be?
 
 Don't you worry friend. We'll do it together.
 
-###Make the Client Do the Work
+### Make the Client Do the Work
 
 Web scraping is not terribly resource intensive, but maybe you're dreaming big and want to do a live scrape for every link anytime one of your users looks at it. No problem, add it to the client code and keep the extra load off your server!
 
@@ -18,7 +18,7 @@ Yeah . . . no. Unfortunately, because of browsers' [same-origin policy](https://
 
 So let's just build the scraper on our own server.
 
-###Your Tools
+### Your Tools
 
 Your going to want to head over to your console and `npm install` [request](https://github.com/request/request) and [cheerio](https://github.com/cheeriojs/cheerio).
 
@@ -26,7 +26,7 @@ Your going to want to head over to your console and `npm install` [request](http
 
 Meanwhile, **Cheerio** is a server-side implementation of [jQuery](https://jquery.com). You are going to be parsing through some html files in a second, and you are *definitely* going to want access to jQuery syntax when you do it.
 
-###Fetching the HTML
+### Fetching the HTML
 
 Using `request-promise` to get the html you want couldn't be simpler:
 
@@ -41,7 +41,7 @@ request(url)
 
 That's it. So now that we have html, what do we do with it? What goes into that little `scrape` function there?
 
-###Cheerio And You
+### Cheerio And You
 
 Cheerio requires a little bit of extra setup. After `require`ing it normally, you'll have to use the `load` method to create a jQuery-like `$` object containing all of the HTML you're planning on scraping. So if your goal was just to return the `title` of that webpage we requested earlier, your `scrape` function might look like this:
 
@@ -57,7 +57,7 @@ var scrape = function(html) {
 
 Once properly loaded, cheerio works identically to jQuery, giving you access to all the same selectors and methods you would normally have on the front-end. So now that you have all of this power, what do you do with it?
 
-###Meta Is The New Meta
+### Meta Is The New Meta
 
 Who knows what information you were hoping to grab with your web-scraper, but there's a good chance that whatever it is is contained in the site's *metadata*. With the rise of social networks, most webpages are hoping to be shared, liked, tweeted, upvoted, or pinned. Enter the `meta` tag. Designed to contain information about a site's title, subject matter, authorship, and more, these tags are left in the `head` of a page just for an enterprising new social media guru like yourself (but mostly for Facebook). For example, here's an edited sample from the source for a [Udemy](https://www.udemy.com/) course:
 

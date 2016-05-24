@@ -14,7 +14,7 @@ But despite that svelte profile, there was still a lot of new syntax to take in 
 If that's all you were looking for, click on the link and give it a download. One page. All of the good bits. I hope it serves you well. If you you'd like little bit more of a primer, I'll hit the bullet points below, but you may also want to check out [this beginner's guide](http://blog.teamtreehouse.com/the-absolute-beginners-guide-to-coffeescript), or this [in-depth series](http://www.ibm.com/developerworks/web/library/wa-coffee1/index.html), and of course the official docs, linked above.
 
 
-###Installing and  Running CoffeeScript###
+### Installing and  Running CoffeeScript
 
 CoffeeScript is installed with [Node.js](https://nodejs.org/)'s package manager, npm. If you don't know what that is, or don't have it installed, you're going to want to get that done first. Afterwards, installing CoffeeScript is as simple as going into your command line and typing:
 
@@ -31,7 +31,7 @@ coffee --output compiled --map --watch --compile ./
 In this case we are telling CoffeeScript to compile every `.coffee` file in our source directory and save the compiled JavaScript to a folder named "compiled". By adding that `--watched` flag, CoffeeScript will look for any changes in the directory, and automatically compile any newly saved files there. Neat. At this point, you may also want to do some googlin' and see if your text editor of choice supports CoffeeScript syntax highlighting out of the box, or if it needs a plug-in.
 
 
-###The Highlights of CoffeeScript###
+### The Highlights of CoffeeScript
 
  **No `;` or `{}`, and not nearly as much `()`.** CoffeeScript is designed to read a lot like english, so it does away with much of the more extraneous punctuation.
 
@@ -50,7 +50,7 @@ In this case we are telling CoffeeScript to compile every `.coffee` file in our 
 **Classes are much improved.** CoffeeScript allows one word [Pseudoclassical](/posts/2015-11-30-tldr-of-classes.html) class creation with the keyword `class`, class inheritance with the keyword `extends`, and method inheritance with the keyword `super`.
 
 
-###Code Comparison!###
+### Code Comparison
 
 Let's see it in action:
 
@@ -103,7 +103,7 @@ for (var k = 2; k < 7; k++) {
 {% endhighlight %}
 
 
-###The Cheat Sheet###
+### The Cheat Sheet
 
 And finally, the cheat sheet linked above. It is by no means exhaustive, but contains examples of most of the most useful CoffeeScript syntax, along with some brief explanations where necessary. Use it as you'd like, and may your JavaScript be a little more caffeinated. 
 

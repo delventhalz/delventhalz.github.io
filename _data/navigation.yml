@@ -1,7 +1,10 @@
 # Menu navigation links
 
-- title: Theme Setup
-  url: /theme-setup/
+- title: The Open Folio
+  url: /open-folio/
 
-- title: External Link
-  url: http://mademistakes.com
+- title: GitHub
+  url: https://github.com/delventhalz
+
+- title: LinkedIn
+  url: https://www.linkedin.com/in/delventhalz

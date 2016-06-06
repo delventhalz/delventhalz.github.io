@@ -1,5 +1,5 @@
-title:            zac.study('JavaScript')
-description:      A student at Hack Reactor, plumbing the depths of JavaScript development, and reporting back to you.
+title:            zac.grok('JavaScript')
+description:      A full stack JavaScript engineer with a compulsion to deeply understand shallow problems.
 disqus_shortname: hpstrtheme
 reading_time:     true
 words_per_minute: 200
@@ -11,14 +11,14 @@ url:              "http://delventhalz.github.io"
 owner:
   name:           Zac Delventhal
   avatar:         avatar.jpg
-  bio:            "A year as a CS major, ten years an actor, now a student at Hack Reactor. How hard could this coding stuff be?"
+  bio:            "A full stack JavaScript engineer with a compulsion to deeply understand shallow problems."
   email:          delventhalz@gmail.com
   # Social networking links used in footer. Update and remove as you like.
   twitter:        delventhalz
   facebook:       
   github:         delventhalz
   stackexchange:  
-  linkedin:       
+  linkedin:       delventhalz
   instagram:      
   flickr:         
   tumblr:         

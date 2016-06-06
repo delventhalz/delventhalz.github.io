@@ -10,6 +10,8 @@ Now *you* have to build a web scraper. How hard could it be?
 
 Don't you worry friend. We'll do it together.
 
+([Mess around with the actual web scraper I built live!](http://map-anything.herokuapp.com/#/scraper))
+
 ### Make the Client Do the Work
 
 Web scraping is not terribly resource intensive, but maybe you're dreaming big and want to do a live scrape for every link anytime one of your users looks at it. No problem, add it to the client code and keep the extra load off your server!

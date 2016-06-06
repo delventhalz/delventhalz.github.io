@@ -4,7 +4,7 @@ title:  "Slim Down Your Code with Single-Line Conditionals"
 date:   2016-01-23 13:55:00 -0600
 categories: javascript
 ---
-So you've been programming in JavaScript for a little while now. Your code is getting lean and mean and DRY as a California reservoir. Maybe you've even started to take advantage of some of JavaScript's single-line conditionals and you're wondering just how deep this rabbit hole goes. Maybe you have no idea what I'm talking about when I say "single-line conditionals". Whether you're a doe-eyed newbie or a hardened professional, this post has some fancry tricks you may be interested in.
+So you've been programming in JavaScript for a little while now. Your code is getting lean and mean and DRY as a California reservoir. Maybe you've even started to take advantage of some of JavaScript's single-line conditionals and you're wondering just how deep this rabbit hole goes. Maybe you have no idea what I'm talking about when I say "single-line conditionals". Whether you're a doe-eyed newbie or a hardened professional, this post has some fun tricks you may be interested in.
 
 ### Braces Optional
 
@@ -71,7 +71,7 @@ This is a debatable improvement, and no longer satisfies our single line desires
 var message = five > 4 ? 'excellent!' : 'wtf?';
 {% endhighlight %}
 
-Unlike an `if else` statement, the ternary operator *is an operator*. That means you are free to use it the right of an assignment statement, which would throw one heck of a syntax error if you tried it with `if else`. Though this isn't necessarily any more readable than other ternary uses, it saves an amazing amount of code when you compare it to the alternative:
+Unlike an `if else` statement, the ternary operator *is an operator*. That means you are free to use it to the right of an assignment statement, which would throw one heck of a syntax error if you tried it with `if else`. Though this isn't necessarily any more readable than other ternary uses, it saves an amazing amount of code when you compare it to the alternative:
 
 {% highlight javascript %}
 var message;
@@ -106,13 +106,13 @@ var returnInputOrFive = function(input) {
 
 Same effect. Less Code. More readable. And imagine the alternate version using `if else`. Might as well go back to punch cards at that point.
 
-But how does this bizarre hack of the OR operator actually work? The secret is in how JavaScript handles logical operators. In the case of `||`, JS is trying to determine whether either of the two operands is "truthy". As soon as it sees the first one is, there is no reason to bother with the second. So it doesn't. Does that mean we can use `&&` to write single-line conditionals too?
+But how does this bizarre hack of the OR operator actually work? The secret is in how JavaScript handles logical operators. In the case of `||`, JS is trying to determine whether either of the two operands is "truthy". As soon as it sees the first one is, there is no reason to bother with the second. So it doesn't. Furthermore, JS never bothers converting a truthy value to `true`, or a falsey value to `false`. Why bother? If the first operand is truthy, just return it. If not, the truthiness of the second operand will determine if the overall expression is truthy or not. So don't even check it, just return it and be done. 
+
+One big gotcha to watch out for here: be sure the value of `input` can't be falsey value that you want to keep. In the above code for example, if we passed in an `input` of `0`, we would ignore it and return `5`. There are six falsey values, `false`, `0`, `NaN`, `''`, `undefined`, and `null`, and if our input evaluates to any of them, our default will be returned. But if that is the sort of behvior you are looking for, you can really clean up your code this way. Does that mean we can use `&&` to write single-line conditionals too?
 
 ### Using && to Write Single-Line Conditionals
 
-Similar to the logical OR, `&&` checks to see if either of two operands is *falsey*. If the first operand is, there is no point in checking the second. *(REMEMBER! Falsey values in JavaScript include `false`, `0`, `''`, `undefined`, and `null`. Everything else is truthy.)*
-
-This behavior is not used nearly as often as `||`, but I did just write some actual server code that I couldn't have been done any other way:
+Similar to the logical OR, `&&` checks to see if either of two operands is *falsey*. If the first operand is, there is no point in checking the second. This behavior is not taken advantage of nearly as often as `||`, but I did just write some actual server code that I couldn't have been done any other way:
 
 {% highlight javascript %}
 module.exports.seedUsers = function(next) {
@@ -143,7 +143,7 @@ if (i === users.length) {
 }
 {% endhighlight %}
 
-If you've never seen this usage before, a `return` statement can be a handy way to break out of a function. No more code will be executed once you run that `return`. This is perfect for a recursive base case. Even better, if you need to call a function on your way out, rather than write them on seperate lines, you can just return the function call itself. So I might have used my own curly brace lesson from before and written: 
+If you've never seen this usage before, a `return` statement is a handy way to break out of a function. No more code will be executed once you run that `return`. It's perfect for a recursive base case. Even better, if you need to call a function on your way out, rather than write them on seperate lines, you can just return the function call itself. So I might have used my own curly brace lesson from before and written: 
 
 {% highlight javascript %}
 if (i === users.length) return next();
@@ -155,7 +155,7 @@ But, I have one more problem problem. This helper function can be called in both
 if (i === users.length) return next && next();
 {% endhighlight %}
 
-If `next` is undefined, JavaScript has no need to evaluate `next()`, and will simply skip it, returning the value to the left (`undefined`, which is fine for my purposes). On the other hand, if `next` is a function (i.e. truthy), JS will look at the value on the right, see that there is a function that needs to be executed, and do so. A fairly complex series of operations have been reduced to one simple (okay, not that simple) line.
+If `next` is undefined, JavaScript has no need to evaluate `next()`, and will simply skip it, returning the value to the left (`undefined`, which is fine for my purposes). On the other hand, if `next` is a function (and therefore truthy), JS will look at the value on the right, see that there is a function that needs to be executed, and do so. A fairly complex series of operations have been reduced to one simple (okay, not that simple) line.
 
 ### With Great Power...
 

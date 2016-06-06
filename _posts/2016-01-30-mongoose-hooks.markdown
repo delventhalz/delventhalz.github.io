@@ -85,7 +85,7 @@ It's best to think of these events as being in two seperate categories. `save`, 
 
 The reasons here are actually fairly technical. It is not actually possible to trigger a `save` event when you `update` a doc. You see, all of the various versions of update (`update`, `findOneAndUpdate`, etc) are what is called "atomic" methods. They don't actually pull anything out of the database. They go in, find the thing, and then modify it *in place*. So when you "save", by grabbing a thing, pulling it out, modifying it, and putting it back, the database will let everyone know: "Hey, someone is saving something here!" But if you just sneak in, and make a little tweak in place with `update`, the db has nothing to say.
 
-Most of these "atomic" triggers then, are actually a convenience ginned up for Mongoose 4. In the past if you wanted to use nifty methods like `findOneAndUpdate`, you would have had to make do without any events triggering at all. They are definitely a huge value add for the ODM, but lumping all of these different sorts of events together can lead to a lot confusion for unfamiliar developers. So let's clear up some important differences now.
+Most of these "atomic" triggers then, are actually a convenience ginned up for Mongoose 4. In the past if you wanted to use nifty methods like `findOneAndUpdate`, you wouldn't have been able to use any hooks at all. They are definitely a huge value add for the ODM, but lumping all of these different sorts of events together can lead to a lot confusion for unfamiliar developers. So let's clear up some important differences now.
 
 ### Order Matters
 
@@ -117,7 +117,7 @@ UserSchema.pre('save', function(next) {...});
 UserSchema.pre('update', function(next) {...});
 {% endhighlight %}
 
-You might shrug this off at first, "just declar hooks first", but this rule *does not apply to `save`, `init`, `validate`, or `remove`*. The following works just fine:
+You might shrug this off at first, "just declare hooks first", but this rule *does not apply to `save`, `init`, `validate`, or `remove`*. The following works just fine:
 
 {% highlight javascript %}
 // This works. Because reasons.
@@ -136,7 +136,7 @@ Why? I actually have no idea on this one. But watch out.
 
 ### This Is Different
 
-You may have noticed in my original "pre save" example, we made good use of the `this` variable. That time, `this` referred to the actual user we were saving. Super useful and convient. In fact, it would have been hard to hash the password without it. Does `this` refer to the same thing in a "pre update" hook? Well . . . try running this code sometime if you're feeling adventurous:
+You may have noticed in my original "pre save" example, we made good use of the `this` variable. That time, `this` referred to the actual user we were saving. Super useful and convenient. In fact, it would have been hard to hash the password without it. Does `this` refer to the same thing in a "pre update" hook? Well . . . try running this code sometime if you're feeling adventurous:
 
 {% highlight javascript %}
 UserSchema.pre('update', function(next) {
@@ -144,9 +144,9 @@ UserSchema.pre('update', function(next) {
 });
 {% endhighlight %}
 
-What you'll get is a huge garbled mess of private variables and various methods. You my friend are looking at a Mongoose `Query` object. Wh-why? What am I supposed to do with this? Well, once again we're running up against some technical limitations. Because we're working atomically, nothing has been pulled out of the database. There is simply no user model to give you. Some applied to before a `find` resolves. Sorry. The Query object does give us some options though.
+What you'll get is a huge garbled mess of private variables and various methods. You my friend are looking at a Mongoose `Query` object. Wh-why? What am I supposed to do with this? Well, once again we're running up against some technical limitations. Because we're working atomically, nothing has been pulled out of the database. There is simply no user model to give you. Same applies to before a `find` resolves. Sorry.
 
-For example, say you have an `updatedAt` timestamp that you want to change on every `save`. That is pretty straightforward, and looks like this:
+The Query object does give us some options though. For example, say you have an `updatedAt` timestamp that you want to change on every `save`. That is easy as pie, and looks like this:
 
 {% highlight javascript %}
 UserSchema.pre('save', function (next) {
@@ -155,7 +155,7 @@ UserSchema.pre('save', function (next) {
 };
 {% endhighlight %}
 
-About what you would expect. Bet you can't guess how you'd do the same thing with the Query object on an `update`:
+Brilliant. But I bet you can't guess how we'd do the exact same thing when we're handed a _Query_ on `update`:
 
 {% highlight javascript %}
 UserSchema.pre('update', function (next) {
@@ -164,13 +164,13 @@ UserSchema.pre('update', function (next) {
 };
 {% endhighlight %}
 
-Although you don't have the object itself, the Query does have access to the same update function you used originally. So what you are doing here is just adding to it. And what if you want to trigger the same thing on `findOneAndUpdate`? Remember, these just trigger on the method call, so you'll have to set up a hook for each individual method you are listening for.
+Although you don't have the object itself, the Query object does have access to the same update function you used originally. So what you are doing here is adding to that. And what if you want to do the same thing on `findOneAndUpdate`? Remember, these just trigger on the method call, so you'll have to set up a hook for each individual method you are listening for.
 
 ### Examples
 
-At this point your questions may be answered, and you may be ready to go out and conquer the world of Mongoose middleware. Excellent. If not, keep reading for some actual implementations my team and I used in our current project [Roadmap To Anything](http://roadmaptoanything.heroku.com).
+At this point your questions may be answered, and you may be ready to go out and conquer the world of Mongoose middleware. Excellent. If not, keep reading for some actual implementations my team and I used in my recent project [Roadmap To Anything](http://map-anything.herokuapp.com/).
 
-The setup: we have two schemas, `User` and `Roadmap`. A roadmap is an ordered collection of resources and lessons that people can follow in order to learn a thing. The user's schema must be able to track three sets of roadmaps: ones they've personally created, ones they've begun but haven't finished, and ones they've finished. The `UserSchema` then, will look something like this:
+The setup: we have two schemas, `User` and `Roadmap`. A roadmap is an ordered collection of resources and lessons that people can follow to learn a thing. The user's schema must be able to track three sets of roadmaps: ones they've personally created, ones they've begun but haven't finished, and ones they've finished. The `UserSchema` then, will look something like this:
 
 {% highlight javascript %}
 var mongoose = require('mongoose'),
@@ -229,7 +229,7 @@ UserSchema.pre('findByIdAndUpdate', function(next) {
 });
 {% endhighlight %}
 
-Notice how we make sure to `call` our heper function and pass in the current `this` context. As messy as that `Query` object is, we're going to need it.
+Notice how we make sure to `call` our heper function and pass in the current `this` context. As messy as that Query object is, we're going to need it.
 
 {% highlight javascript %}
 var handleCompletedRoadmaps = function (next) {

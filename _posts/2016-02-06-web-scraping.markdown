@@ -10,7 +10,7 @@ Now *you* have to build a web scraper. How hard could it be?
 
 Don't you worry friend. We'll do it together.
 
-([Mess around with the actual web scraper I built live!](http://map-anything.herokuapp.com/#/scraper))
+_([Mess around with the actual web scraper I built live!](http://map-anything.herokuapp.com/#/scraper))_
 
 ### Make the Client Do the Work
 
@@ -61,7 +61,7 @@ Once properly loaded, cheerio works identically to jQuery, giving you access to 
 
 ### `meta` Is So Meta
 
-There's a good chance that whatever information you wanted to scrape can be found in a site's *metadata*. With the rise of social networks, most webpages are hoping to be shared, liked, tweeted, upvoted, pinned, or übermensched. Enter the `meta` tag. Designed to contain information about a site's title, subject matter, authorship, and more, these tags are left in the `head` of a page for an enterprising social media gurus like yourself (and Facebook, mostly Facebook). For example, here's an edited sample from the source for a [Udemy](https://www.udemy.com/) course:
+There's a good chance that whatever information you wanted to scrape can be found in a site's *metadata*. With the rise of social networks, most webpages are hoping to be shared, liked, tweeted, upvoted, pinned, or übermensched. Enter the `meta` tag. Designed to contain information about a site's title, subject matter, authorship, and more, these tags are left in the `head` of a page for an enterprising social media gurus like yourself (and Facebook, mostly Facebook) to find. For example, here's some of the HTML from a [Udemy](https://www.udemy.com/) course:
 
 {% highlight html %}
 <head>
@@ -89,7 +89,7 @@ There's a good chance that whatever information you wanted to scrape can be foun
 </head>
 {% endhighlight %}
 
-Well hello metadata. So what is all of this? Well, there isn't yet any standard metadata system, and since `meta` tags are basically roll-your-own, most social networks have. The `og` tags are used by Facebook, the `twitter` tags by Twitter. Udemy has even built some of their own custom `udemy_com` tags. Most sites will try to cover all of their bases, and include a hodge-podge of tags, many redundant, just to make sure they don't spoil their chances of being the next viral sensation.
+Well hello metadata. So what is all of this? Well, there isn't yet any standard metadata system, and since `meta` tags are basically roll-your-own, most social networks have done just that. The `og` tags are used by Facebook, the `twitter` tags by Twitter. Udemy has even built some of their own custom `udemy_com` tags. Most sites will try to cover all of their bases, and include a hodge-podge of tags, many redundant, just to make sure they don't spoil their chances of being the next viral sensation.
 
 In all of these cases you'll use `attr('content')` to get the information you need from the meta tag, but the selector is a little more complicated. Standard class or id selectors obviously won't work, which is why you'll want jQuery's attribute selector. For the Twitter title for example, that would look like `$('meta[name="twitter:title"]')`. For the OG title, it would be `$('meta[property="og:title"]')`. Armed with these tools, we could easily write a simple metadata scraper:
 
@@ -146,7 +146,7 @@ With that in place we can write a simple function to loop through the specified 
 
 {% highlight javascript %}
 var cheerio = require('cheerio');
-var targets = require(./targets.json);
+var targets = require('./targets.json');
 
 var scrape = function(html) {
   var $ = cheerio.load(html);
@@ -158,7 +158,6 @@ var scrape = function(html) {
       var val = targets[type].val;
 
       var scraped = $('meta[' + prop + '="' + val + '"]').attr('content');
-
       if (scraped) return scraped;
     }
   };
@@ -170,4 +169,4 @@ var scrape = function(html) {
 };
 {% endhighlight %}
 
-The big advantage of this architecture, is that as you discover new pages with weird tags, adding them is as simple as creating a new element in one of your arrays. Of course, if you ever want to scrape something *other* than `meta` tags, your code will have to get a fair amount more complicated (heaven help you if you start scraping `text`), but I'm sure you can figure out the details for yourself.
+The big advantage of this architecture, is that as you discover new pages with weird tags, adding them is as simple as adding a new object to your JSON file. Of course, if you ever want to scrape something *other* than `meta` tags, your code will have to get a fair amount more complicated (heaven help you if you start scraping `text`), but I'm sure you can hash out all those details for yourself.
